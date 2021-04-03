@@ -40,55 +40,52 @@ export class AppComponent {
     };
   }
 
-  onClick(){
+  onClickImage(){
     this.image = false;
-    this.video = true;
+    this.video1 = true;
+    this.video2 = false;
 
-    var source = document.createElement("source");
-    source.src = "assets/video/Cropped.mp4";
-    source.type = "video/mp4";
-    var newVideo = document.createElement("video");
-    newVideo.width = 1440;
-    newVideo.height = 720;
-    newVideo.classList.add("image");
-    newVideo.id = "video";
-    newVideo.appendChild(source);
-    var div = document.getElementById("imageContainer")
-    div.appendChild(newVideo)
-    newVideo.play();
-
-    //this.myVideo.nativeElement.play()
-    /*var div = document.getElementById("imageContainer")
-    console.log(div.innerHTML);
-    //var x = div.firstElementChild;
-    var v : any = document.getElementById("video");
-    console.log(v);
-    v.nativeElement.play();*/
-    /*var offsets = document.getElementById('imageContainer').getBoundingClientRect();
-    var top = offsets.top;
-    var left = offsets.left;
-    const lightBoxLeft = 1100-left;
-    const lightBoxRight = 1300-left;
-    const lightBoxTop = 600-top;
-    const lightBoxBottom = 800-top;
-    console.log("Estou aqui");
-    console.log("X: " + x + "; Y: " + y);
-    if(x > lightBoxLeft && x < lightBoxRight && y > lightBoxTop && y < lightBoxBottom){
-
-      alert("You clicked the light");
-    }*/
+    setTimeout(this.startVideo1, 10);
 
   }
 
+  onClickVideo1(){
+    this.image = false;
+    this.video1 = false;
+    this.video2 = true;
+
+    setTimeout(this.startVideo2, 10);
+  }
+
+  onClickVideo2(){
+    this.image = true;
+    this.video1 = false;
+    this.video2 = false;
+  }
+  startVideo1(){
+    var videoElem : any = document.getElementById("video1");
+    videoElem.play();
+  }
+
+  startVideo2(){
+    var videoElem : any = document.getElementById("video2");
+    videoElem.play();
+  }
+
   image = true;
-  video = false;
+  video1 = false;
+  video2 = false;
 
   showImage(){
     return this.image;
   }
 
-  showVideo(){
-    return this.video;
+  showVideo1(){
+    return this.video1;
+  }
+
+  showVideo2(){
+    return this.video2;
   }
 
   current = 1;

@@ -11,10 +11,13 @@
           <button (click)="proximoIndice()" class="botaoSeguinte"> > </button>
       </div>
       <div id="imageContainer">
-          <!-- <video class="image" id="video" *ngIf="video">
+          <video class="image" id="video1" *ngIf="showVideo1()" (click)="onClickVideo1()">
             <source src="assets/video/Cropped.mp4" type="video/mp4">
-          </video> -->
-          <img class="image" id="image" src='{{getImage()}}' (click)="onClick()" *ngIf="image">
+          </video>
+          <video class="image" id="video2" *ngIf="showVideo2()" (click)="onClickVideo2()">
+            <source src="assets/video/return.mp4" type="video/mp4">
+          </video>
+          <img class="image" id="image" src='{{getImage()}}' (click)="onClickImage()" *ngIf="image">
       </div>
     </div>
   </div>
