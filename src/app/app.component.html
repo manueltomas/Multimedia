@@ -2,18 +2,20 @@
   <title>Test Sound</title>
 </head>
 <body>
-  <div class="image">
-    <div id="botaoAnt" *ngIf="image">
-        <button (click)="anteriorIndice()" class="botaoAnterior"> <  </button>
-    </div>
-    <div id="botaoNxt" *ngIf="image">
-        <button (click)="proximoIndice()" class="botaoSeguinte"> > </button>
-    </div>
-    <div id="imageContainer">
-        <!-- <video class="image" id="video" *ngIf="video">
-          <source src="assets/video/Cropped.mp4" type="video/mp4">
-        </video> -->
-        <img class="image" id="image" src='{{getImage()}}' (click)="onClick()" *ngIf="image">
+  <div class="master">
+    <div class="image">
+      <div id="botaoAnt" *ngIf="image">
+          <button (click)="anteriorIndice()" class="botaoAnterior"> <  </button>
+      </div>
+      <div id="botaoNxt" *ngIf="image">
+          <button (click)="proximoIndice()" class="botaoSeguinte"> > </button>
+      </div>
+      <div id="imageContainer">
+          <!-- <video class="image" id="video" *ngIf="video">
+            <source src="assets/video/Cropped.mp4" type="video/mp4">
+          </video> -->
+          <img class="image" id="image" src='{{getImage()}}' (click)="onClick()" *ngIf="image">
+      </div>
     </div>
   </div>
 </body>
