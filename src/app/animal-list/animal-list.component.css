@@ -1,0 +1,38 @@
+#animals{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 3px;
+    justify-items: center;
+    align-items: center;
+}
+
+.animal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid black;
+    font-size: 3em;
+    width: 150px;
+    height: 150px;
+}
+.animalImg {
+    height: 150px;
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+}
+
+.animalImgCatched{
+    height: 150px;
+}
+/* 
+#animal-list-title{
+    grid-row: 1;
+    grid-column: 1 / 2;
+
+} */
+
+#enclosing{
+    text-align: center;
+}

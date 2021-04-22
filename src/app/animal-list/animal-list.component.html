@@ -1,0 +1,11 @@
+<div id="enclosing">
+    <div id="animal-list-title">
+        List of animals
+    </div>
+    <div id="animals">
+        <div class="animal" *ngFor="let a of animalService.getAnimals()">
+            <img *ngIf="a.catched" id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}">
+            <img *ngIf="!a.catched" id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}">
+        </div>
+    </div>
+</div>
