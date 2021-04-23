@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WORLDS } from '../mock-worlds';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class WorldsComponent implements OnInit {
   }
   
   chooseWorld(){
-	this.router.navigate(['/animation'])
+	  this.router.navigate(['animation',WORLDS[0].id])
   }
 
 }

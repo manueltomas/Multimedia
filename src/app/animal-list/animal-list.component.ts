@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AnimalService } from '../animal.service';
 import { AppComponent } from '../app.component';
 
@@ -9,12 +10,20 @@ import { AppComponent } from '../app.component';
 })
 export class AnimalListComponent implements OnInit {
 
+  world;
+
   constructor(
+    private route : ActivatedRoute,
     public animalService : AnimalService
   ) { }
 
   ngOnInit() {
     var animals = document.getElementsByClassName("animal")
+    this.world = this.route.snapshot.paramMap.get('world');
+    //console.log("world: " + this.world);
+    if(this.world != null){
+      this.animalService.changeToWorld(this.world);
+    }
   }
 
   getColumn(a){
@@ -59,6 +68,18 @@ export class AnimalListComponent implements OnInit {
     var animal = document.getElementsByClassName(name)[0];
     animal.classList.remove("animalImg");
     animal.classList.add("animalImgCatched");
+  }
+
+  showLocalAnimals(){
+    this.world = this.route.snapshot.paramMap.get('world');
+    console.log("world: " + this.world);
+    if(this.world != null){
+      this.animalService.changeToWorld(this.world);
+    }
+  }
+
+  showAllAnimals(){
+    this.animalService.changeToAll();
   }
 
 }

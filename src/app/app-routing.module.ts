@@ -5,7 +5,7 @@ import { AnimationComponent } from './animation/animation.component'
 
 const routes: Routes = [
 	{ path: '', component: WorldsComponent },
-	{ path: 'animation', component: AnimationComponent }
+	{ path: 'animation/:world', component: AnimationComponent }
 ];
 
 @NgModule({

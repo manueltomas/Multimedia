@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AnimalListComponent } from '../animal-list/animal-list.component';
 import { AnimalService } from '../animal.service';
+import { WorldService } from '../world.service';
 
 var x : number;
 var y : number;
@@ -14,35 +16,41 @@ export class AnimationComponent {
   title = 'Multimedia';
   audio;
   onTop;
+  world;
 
   constructor(
+    private route : ActivatedRoute,
+    private worldService : WorldService,
     public animalService : AnimalService){}
 
   ngOnInit(){
+    this.world = this.route.snapshot.paramMap.get('world');
+    console.log("world: " + this.world);
+    this.animalService.changeToWorld(this.world)
     var offsets = document.getElementById('imageContainer').getBoundingClientRect();
     var top = offsets.top;
     var left = offsets.left;
     //console.log("Div in position (" + left + "," + top + ")");
-    window.onmousemove = function(e){
-          x = e.clientX-left,
-          y = e.clientY-top;
-          console.log("Mouse in position (" + x + "," + y + ")");
-          if(this.audio == undefined){
-            this.audio = new Audio();
-          }
-          if(x > 1100-left && x < 1300-left && y > 600-top && y < 800-top){
-            if(!this.onTop){
-              this.audio.src = "../../../assets/sounds/Sia - Cheap Thrills (Lyric Video) ft. Sean Paul.mp3";
-              this.audio.load();
-              this.audio.play();
-            }
-            console.log("You are hoovering the light");
-            this.onTop = true;
-          }else{
-            this.onTop = false;
-            this.audio.pause();
-          }
-    };
+    // window.onmousemove = function(e){
+    //       x = e.clientX-left,
+    //       y = e.clientY-top;
+    //       console.log("Mouse in position (" + x + "," + y + ")");
+    //       if(this.audio == undefined){
+    //         this.audio = new Audio();
+    //       }
+    //       if(x > 1100-left && x < 1300-left && y > 600-top && y < 800-top){
+    //         if(!this.onTop){
+    //           this.audio.src = "../../../assets/sounds/Sia - Cheap Thrills (Lyric Video) ft. Sean Paul.mp3";
+    //           this.audio.load();
+    //           this.audio.play();
+    //         }
+    //         console.log("You are hoovering the light");
+    //         this.onTop = true;
+    //       }else{
+    //         this.onTop = false;
+    //         this.audio.pause();
+    //       }
+    // };
   }
 
   onClickImage(){
@@ -95,7 +103,7 @@ export class AnimationComponent {
 
   current = 1;
   getImage(){
-    return `assets/img/${this.current}.png`
+    return `assets/img/${this.worldService.getWorldById(this.world).name}${this.current}.png`
   }
 
   anteriorIndice(){
