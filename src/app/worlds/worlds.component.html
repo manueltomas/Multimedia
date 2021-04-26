@@ -1,5 +1,20 @@
-<p>worlds works!</p>
 
-<div>
-	<button (click)="chooseWorld()">Click me!</button>
+<div class="image imageDiv">
+
+	<h1>Choose {{getWorldName()}}</h1>
+	
+    <div id="botaoAnt">
+        <button (click)="previousWorld()" class="botaoAnterior"> <  </button>
+    </div>
+    <div id="botaoNxt">
+        <button (click)="nextWorld()" class="botaoSeguinte"> > </button>
+    </div>
+	
+	<div id="imageContainer">
+		<img class="image" id="image" src='{{getWorld()}}'>
+	</div>
+	
+	<div id="chooseButton" class="centerButton">
+		<button (click)="chooseWorld()">Choose World!</button>
+	</div>
 </div>
