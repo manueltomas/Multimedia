@@ -1,7 +1,9 @@
 
 <div class="image imageDiv">
 
-	<h1>Choose {{getWorldName()}}</h1>
+	<div id="worldTitle">
+		<h1>Go to {{getWorldName()}}</h1>
+	</div>
 	
     <div id="botaoAnt">
         <button (click)="previousWorld()" class="botaoAnterior"> <  </button>
@@ -14,7 +16,7 @@
 		<img class="image" id="image" src='{{getWorld()}}'>
 	</div>
 	
-	<div id="chooseButton" class="centerButton">
-		<button (click)="chooseWorld()">Choose World!</button>
+	<div id="chooseButton">
+		<button class="centerButton" (click)="chooseWorld()">Select World!</button>
 	</div>
 </div>
