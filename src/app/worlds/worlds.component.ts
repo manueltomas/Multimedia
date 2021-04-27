@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { WORLDS } from '../mock-worlds';
 import { WorldService } from '../world.service';
@@ -10,21 +10,25 @@ import { WorldService } from '../world.service';
   styleUrls: ['./worlds.component.css']
 })
 export class WorldsComponent implements OnInit {
-
+  
+  current;
+  
   constructor(
 	private router : Router,
 	private worldService : WorldService) { }
 
   ngOnInit(): void {
-
+	  this.current = this.worldService.worldNumber;
+	  if(this.current === undefined){
+	  	this.current =  1;
+	  }
+	  console.log ("current ", this.current );
   }
   
   chooseWorld(){
 	  this.router.navigate(['animation',WORLDS[0].id])
   }
-  
-  current = 1;
-  
+    
   getWorld(){
     return `assets/img/${this.worldService.getWorldById(this.current).name}HubWorld.png`
   }
@@ -46,5 +50,4 @@ export class WorldsComponent implements OnInit {
       this.current++;
     }
   }
-
 }

@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { AnimationComponent } from './animation/animation.component';
 import { AnimalListComponent } from './animal-list/animal-list.component';
 import { WorldsComponent } from './worlds/worlds.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -15,8 +18,10 @@ import { WorldsComponent } from './worlds/worlds.component';
 	WorldsComponent
   ],
   imports: [
+  	MatTooltipModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

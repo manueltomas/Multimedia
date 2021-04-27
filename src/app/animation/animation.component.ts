@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AnimalListComponent } from '../animal-list/animal-list.component';
 import { AnimalService } from '../animal.service';
 import { WorldService } from '../world.service';
+import { Router } from '@angular/router';
+
 
 var x : number;
 var y : number;
@@ -19,6 +21,7 @@ export class AnimationComponent {
   world;
 
   constructor(
+	private router : Router,
     private route : ActivatedRoute,
     private worldService : WorldService,
     public animalService : AnimalService){}
@@ -118,5 +121,10 @@ export class AnimationComponent {
     if(this.current == 0){
       this.current++;
     }
+  }
+  
+  returnToHub(){
+	  this.worldService.worldNumber = this.world;
+	  this.router.navigate([''])
   }
 }

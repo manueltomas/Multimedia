@@ -6,6 +6,8 @@ import { WORLDS } from './mock-worlds';
 })
 export class WorldService {
 
+  worldNumber;
+  
   constructor() { }
 
   getWorldById(id){
