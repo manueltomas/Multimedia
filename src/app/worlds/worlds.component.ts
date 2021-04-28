@@ -29,7 +29,6 @@ export class WorldsComponent implements OnInit {
   
   chooseWorld(){
 	  this.router.navigate(['animation',WORLDS[0].id])
-    this.animalService.changeToWorld(WORLDS[0].id)
   }
     
   getWorld(){
@@ -46,6 +45,7 @@ export class WorldsComponent implements OnInit {
       this.current = 3;
     }
     this.worldService.changeWorld(this.current)
+    this.animalService.showWorld();
   }
 
   nextWorld(){
@@ -54,5 +54,6 @@ export class WorldsComponent implements OnInit {
       this.current++;
     }
     this.worldService.changeWorld(this.current)
+    this.animalService.showWorld();
   }
 }

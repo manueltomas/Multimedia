@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ANIMALS } from './mock-animals';
+import { WorldService } from './world.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnimalService {
 
+  
   animalsToShow;
 
   local;
 
-  constructor() {
+  constructor(private worldService : WorldService) {
     this.animalsToShow = ANIMALS; 
   }
 
@@ -25,19 +27,15 @@ export class AnimalService {
   showAll(){
     this.local = false;
   }
-  
-  changeToWorld(world: number): any {
+
+  showWorld(){
     var result = [];
     for(var i = 0; i < ANIMALS.length; i++){
-      if(ANIMALS[i].world == world){
+      if(ANIMALS[i].world == this.worldService.worldNumber){
         result.push(ANIMALS[i])
       }
     }
     this.animalsToShow = result;
-    console.log("animals to show: " + this.animalsToShow)
-  }
-
-  showWorld(){
     this.local = true;
   }
 
