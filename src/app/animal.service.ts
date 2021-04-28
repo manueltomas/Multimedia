@@ -8,19 +8,25 @@ export class AnimalService {
 
   animalsToShow;
 
+  local;
+
   constructor() {
     this.animalsToShow = ANIMALS; 
   }
 
   getAnimals(){
     console.log(this.animalsToShow)
-    return this.animalsToShow;
+    if(this.local){
+      return this.animalsToShow;
+    }else{
+      return ANIMALS;
+    }
   }
-  changeToAll(){
-    this.animalsToShow = ANIMALS;
+  showAll(){
+    this.local = false;
   }
   
-  changeToWorld(world: any): any {
+  changeToWorld(world: number): any {
     var result = [];
     for(var i = 0; i < ANIMALS.length; i++){
       if(ANIMALS[i].world == world){
@@ -29,6 +35,10 @@ export class AnimalService {
     }
     this.animalsToShow = result;
     console.log("animals to show: " + this.animalsToShow)
+  }
+
+  showWorld(){
+    this.local = true;
   }
 
   getAnimal(id){

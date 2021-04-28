@@ -10,7 +10,6 @@ import { AppComponent } from '../app.component';
 })
 export class AnimalListComponent implements OnInit {
 
-  world;
 
   constructor(
     private route : ActivatedRoute,
@@ -19,11 +18,7 @@ export class AnimalListComponent implements OnInit {
 
   ngOnInit() {
     var animals = document.getElementsByClassName("animal")
-    this.world = this.route.snapshot.paramMap.get('world');
-    //console.log("world: " + this.world);
-    if(this.world != null){
-      this.animalService.changeToWorld(this.world);
-    }
+    this.animalService.showWorld();
   }
 
   getColumn(a){
@@ -71,15 +66,11 @@ export class AnimalListComponent implements OnInit {
   }
 
   showLocalAnimals(){
-    this.world = this.route.snapshot.paramMap.get('world');
-    console.log("world: " + this.world);
-    if(this.world != null){
-      this.animalService.changeToWorld(this.world);
-    }
+    this.animalService.showWorld();
   }
 
   showAllAnimals(){
-    this.animalService.changeToAll();
+    this.animalService.showAll();
   }
 
 }

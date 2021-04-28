@@ -18,7 +18,6 @@ export class AnimationComponent {
   title = 'Multimedia';
   audio;
   onTop;
-  world;
 
   constructor(
 	private router : Router,
@@ -27,9 +26,6 @@ export class AnimationComponent {
     public animalService : AnimalService){}
 
   ngOnInit(){
-    this.world = this.route.snapshot.paramMap.get('world');
-    console.log("world: " + this.world);
-    this.animalService.changeToWorld(this.world)
     var offsets = document.getElementById('imageContainer').getBoundingClientRect();
     var top = offsets.top;
     var left = offsets.left;
@@ -106,7 +102,7 @@ export class AnimationComponent {
 
   current = 1;
   getImage(){
-    return `assets/img/${this.worldService.getWorldById(this.world).name}${this.current}.png`
+    return `assets/img/${this.worldService.getWorldById().name}${this.current}.png`
   }
 
   anteriorIndice(){
@@ -124,7 +120,6 @@ export class AnimationComponent {
   }
   
   returnToHub(){
-	  this.worldService.worldNumber = this.world;
 	  this.router.navigate([''])
   }
 }

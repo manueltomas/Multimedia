@@ -6,11 +6,11 @@ import { WORLDS } from './mock-worlds';
 })
 export class WorldService {
 
-  worldNumber;
+  worldNumber = 1;
   
   constructor() { }
 
-  getWorldById(id){
+  getWorldById(){
     // console.log("id: " + id)
     // console.log("worlds: " + WORLDS)
     // console.log("worlds filtered: " + WORLDS.filter(function(w){
@@ -19,10 +19,13 @@ export class WorldService {
     // }))
     var result;
     for(var i = 0; i < WORLDS.length; i++){
-      if(WORLDS[i].id == id){
+      if(WORLDS[i].id == this.worldNumber){
         result = WORLDS[i]
       }
     }
     return result;
+  }
+  changeWorld(id){
+    this.worldNumber = id;
   }
 }

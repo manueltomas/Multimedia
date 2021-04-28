@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnimalService } from '../animal.service';
 import { WORLDS } from '../mock-worlds';
 import { WorldService } from '../world.service';
 
@@ -15,7 +16,8 @@ export class WorldsComponent implements OnInit {
   
   constructor(
 	private router : Router,
-	private worldService : WorldService) { }
+	private worldService : WorldService,
+  private animalService : AnimalService) { }
 
   ngOnInit(): void {
 	  this.current = this.worldService.worldNumber;
@@ -27,14 +29,15 @@ export class WorldsComponent implements OnInit {
   
   chooseWorld(){
 	  this.router.navigate(['animation',WORLDS[0].id])
+    this.animalService.changeToWorld(WORLDS[0].id)
   }
     
   getWorld(){
-    return `assets/img/${this.worldService.getWorldById(this.current).name}HubWorld.png`
+    return `assets/img/${this.worldService.getWorldById().name}HubWorld.png`
   }
   
   getWorldName(){
-	 return this.worldService.getWorldById(this.current).name
+	 return this.worldService.getWorldById().name
   }
 
   previousWorld(){
@@ -42,6 +45,7 @@ export class WorldsComponent implements OnInit {
     if(this.current == 0){
       this.current = 3;
     }
+    this.worldService.changeWorld(this.current)
   }
 
   nextWorld(){
@@ -49,5 +53,6 @@ export class WorldsComponent implements OnInit {
     if(this.current == 0){
       this.current++;
     }
+    this.worldService.changeWorld(this.current)
   }
 }
