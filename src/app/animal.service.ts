@@ -6,7 +6,6 @@ import { WorldService } from './world.service';
   providedIn: 'root'
 })
 export class AnimalService {
-
   
   animalsToShow;
 
@@ -37,6 +36,16 @@ export class AnimalService {
     }
     this.animalsToShow = result;
     this.local = true;
+  }
+  
+  refresh() {
+    var result = [];
+    for(var i = 0; i < ANIMALS.length; i++){
+      if(ANIMALS[i].world == this.worldService.worldNumber){
+        result.push(ANIMALS[i])
+      }
+    }
+    this.animalsToShow = result;
   }
 
   getAnimal(id){

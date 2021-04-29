@@ -45,7 +45,7 @@ export class WorldsComponent implements OnInit {
       this.current = 3;
     }
     this.worldService.changeWorld(this.current)
-    this.animalService.showWorld();
+    this.animalService.refresh();
   }
 
   nextWorld(){
@@ -54,6 +54,6 @@ export class WorldsComponent implements OnInit {
       this.current++;
     }
     this.worldService.changeWorld(this.current)
-    this.animalService.showWorld();
+    this.animalService.refresh();
   }
 }
