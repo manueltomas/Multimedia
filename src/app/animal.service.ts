@@ -28,13 +28,7 @@ export class AnimalService {
   }
 
   showWorld(){
-    var result = [];
-    for(var i = 0; i < ANIMALS.length; i++){
-      if(ANIMALS[i].world == this.worldService.worldNumber){
-        result.push(ANIMALS[i])
-      }
-    }
-    this.animalsToShow = result;
+    this.refresh();
     this.local = true;
   }
   
