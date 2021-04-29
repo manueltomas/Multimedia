@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
 import { AppComponent } from '../app.component';
+import { AnimalInfoService } from '../animal-info.service';
 
 @Component({
   selector: 'app-animal-list',
@@ -15,7 +16,8 @@ export class AnimalListComponent implements OnInit {
   constructor(
 	private router : Router,
     private route : ActivatedRoute,
-    public animalService : AnimalService
+    public animalService : AnimalService,
+	private animalInfoService: AnimalInfoService
   ) { }
 
   ngOnInit() {
@@ -77,8 +79,8 @@ export class AnimalListComponent implements OnInit {
   
   onClickAnimal(a){
 	if(a.catched){
+		this.animalInfoService.changeAnimal(a);
 		this.router.navigate(['info']);
 	}
   }
-
 }

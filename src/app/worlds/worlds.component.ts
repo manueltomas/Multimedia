@@ -28,7 +28,8 @@ export class WorldsComponent implements OnInit {
   }
   
   chooseWorld(){
-	  this.router.navigate(['animation'])
+	  this.worldService.changeAnimation(1);
+	  this.router.navigate(['animation']);
   }
     
   getWorld(){

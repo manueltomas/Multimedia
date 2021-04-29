@@ -7,6 +7,7 @@ import { WORLDS } from './mock-worlds';
 export class WorldService {
 
   worldNumber = 1;
+  animationNumber = 1;
   
   constructor() { }
 
@@ -27,5 +28,9 @@ export class WorldService {
   }
   changeWorld(id){
     this.worldNumber = id;
+  }
+  
+  changeAnimation(id){
+	this.animationNumber = id;
   }
 }

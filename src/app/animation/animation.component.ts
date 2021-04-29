@@ -18,6 +18,8 @@ export class AnimationComponent {
   title = 'Multimedia';
   audio;
   onTop;
+  
+  current;
 
   constructor(
 	private router : Router,
@@ -29,6 +31,12 @@ export class AnimationComponent {
     var offsets = document.getElementById('imageContainer').getBoundingClientRect();
     var top = offsets.top;
     var left = offsets.left;
+	
+	this.current = this.worldService.animationNumber;
+	  if(this.current === undefined){
+	  	this.current =  1;
+	}
+	  
     //console.log("Div in position (" + left + "," + top + ")");
     // window.onmousemove = function(e){
     //       x = e.clientX-left,
@@ -100,7 +108,6 @@ export class AnimationComponent {
     return this.video2;
   }
 
-  current = 1;
   getImage(){
     return `assets/img/${this.worldService.getWorldById().name}${this.current}.png`
   }
@@ -110,6 +117,7 @@ export class AnimationComponent {
     if(this.current == 0){
       this.current = 4;
     }
+	this.worldService.changeAnimation(this.current);
   }
 
   proximoIndice(){
@@ -117,6 +125,7 @@ export class AnimationComponent {
     if(this.current == 0){
       this.current++;
     }
+	this.worldService.changeAnimation(this.current);
   }
   
   returnToHub(){
