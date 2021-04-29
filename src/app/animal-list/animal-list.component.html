@@ -10,8 +10,8 @@
             <a>Global</a>
         </div>
         <div class="animal" *ngFor="let a of animalService.getAnimals()">
-            <img *ngIf="a.catched" id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}">
-            <img *ngIf="!a.catched" id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}">
+            <img *ngIf="a.catched" id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
+            <img *ngIf="!a.catched" id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
         </div>
     </div>
 </div>

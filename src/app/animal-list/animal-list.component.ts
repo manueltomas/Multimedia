@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
 import { AppComponent } from '../app.component';
 
@@ -12,6 +13,7 @@ export class AnimalListComponent implements OnInit {
 
 
   constructor(
+	private router : Router,
     private route : ActivatedRoute,
     public animalService : AnimalService
   ) { }
@@ -71,6 +73,12 @@ export class AnimalListComponent implements OnInit {
 
   showAllAnimals(){
     this.animalService.showAll();
+  }
+  
+  onClickAnimal(a){
+	if(a.catched){
+		this.router.navigate(['info']);
+	}
   }
 
 }

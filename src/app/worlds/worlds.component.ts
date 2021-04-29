@@ -17,7 +17,7 @@ export class WorldsComponent implements OnInit {
   constructor(
 	private router : Router,
 	private worldService : WorldService,
-  private animalService : AnimalService) { }
+	private animalService : AnimalService) { }
 
   ngOnInit(): void {
 	  this.current = this.worldService.worldNumber;
@@ -28,7 +28,7 @@ export class WorldsComponent implements OnInit {
   }
   
   chooseWorld(){
-	  this.router.navigate(['animation',WORLDS[0].id])
+	  this.router.navigate(['animation'])
   }
     
   getWorld(){

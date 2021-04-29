@@ -8,6 +8,7 @@ import { AnimalListComponent } from './animal-list/animal-list.component';
 import { WorldsComponent } from './worlds/worlds.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnimalInfoComponent } from './animal-info/animal-info.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     AnimationComponent,
     AnimalListComponent,
-	WorldsComponent
+	WorldsComponent,
+	AnimalInfoComponent
   ],
   imports: [
   	MatTooltipModule,
