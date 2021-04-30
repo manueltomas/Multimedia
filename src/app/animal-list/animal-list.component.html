@@ -1,17 +1,22 @@
 <div id="enclosing">
-    <div id="animal-list-title">
-        List of animals
-    </div>
     <div id="animals">
-        <div (click)="showLocalAnimals()">
-            <a>Local</a>
+        <div id="header">
+            <div (click)="showLocalAnimals()" class="list-btn selected">
+                <a>Local</a>
+            </div>
+            <div (click)="showAllAnimals()" class="list-btn">
+                <a>Global</a>
+            </div>
+            <img src="\assets\icons\animals-list-icon.png">
         </div>
-        <div (click)="showAllAnimals()">
-            <a>Global</a>
+        <div id="main">
+            <div class="animal" *ngFor="let a of animalService.getAnimals()">
+                <img *ngIf="a.catched" id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
+                <img *ngIf="!a.catched" id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
+            </div>
         </div>
-        <div class="animal" *ngFor="let a of animalService.getAnimals()">
-            <img *ngIf="a.catched" id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
-            <img *ngIf="!a.catched" id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
+        <div id="bar"></div>
+        <div id="footer">
         </div>
     </div>
 </div>

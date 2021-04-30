@@ -1,12 +1,42 @@
+<div id="container">
+	<video class="video" loop> <!-- autoplay -->
+		<source src="\assets\video\world_list_bg.mp4" type="video/mp4">
+	</video>
+	<div id="ui">
+		<div id="top">
+			<div>
+				<button class="back-button"></button>
+			</div>
+			<div id="worldTitle">
+				<h1 class="title">Choose a Location</h1>
+			</div>
+			<div style="width: 100px;">
+			</div>
+		</div>
+		<div id="middle">
+			<div id="botaoAnt">
+				<button (click)="previousWorld()" class="arrow"></button>
+			</div>
+			<!-- <div id="imageContainer">
+				<img class="image" id="image" src='{{getWorld()}}'>
+			</div> -->
+			<div id="botaoNxt">
+				<button (click)="nextWorld()" class="arrow arrows-right"></button>
+			</div>
+		</div>
+		<div id="chooseButton">
+			<button class="centerButton" class="btn" (click)="chooseWorld()">Select: {{getWorldName()}}</button>
+		</div>
+	</div>
+</div>
 
-<div class="image imageDiv">
 
+<!-- <div class="image imageDiv">
 	<div id="worldTitle">
 		<h1>Current Location: {{getWorldName()}}</h1>
 	</div>
-	
     <div id="botaoAnt">
-        <button (click)="previousWorld()" class="botaoAnterior"> <  </button>
+        <button (click)="previousWorld()" class="botaoAnterior"> </button>
     </div>
     <div id="botaoNxt">
         <button (click)="nextWorld()" class="botaoSeguinte"> > </button>
@@ -19,4 +49,4 @@
 	<div id="chooseButton">
 		<button class="centerButton" (click)="chooseWorld()">Select World!</button>
 	</div>
-</div>
+</div> -->
