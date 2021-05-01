@@ -24,17 +24,20 @@ export class WorldsComponent implements OnInit {
 	private animalService : AnimalService) { }
 
   ngOnInit(): void {
-	  this.current = this.worldService.worldNumber;
-	  if(this.current === undefined){
-	  	this.current =  1;
-	  }
-	  console.log ("current ", this.current );
+	this.current = this.worldService.worldNumber;
+	if(this.current === 0){
+		this.current =  1;
+	}
+	this.worldService.changeWorld(this.current)
+	this.animalService.refresh();
 
     var source : any = document.getElementById("source")
     this.source = source
     var videoAux : any = document.getElementById("video")
     this.video = videoAux;
+	this.video.play()
     this.changeVideo()
+	
   }
   
   chooseWorld(){
@@ -121,5 +124,9 @@ export class WorldsComponent implements OnInit {
     video.load();
     video.play()
     console.log(source.src)
+  }
+  
+  backToMainMenu(){
+	this.router.navigate([''])
   }
 }

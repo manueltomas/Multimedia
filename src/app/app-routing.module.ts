@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { WorldsComponent } from './worlds/worlds.component'
 import { AnimationComponent } from './animation/animation.component'
 import { AnimalInfoComponent} from './animal-info/animal-info.component'
+import { MainMenuComponent} from './main-menu/main-menu.component'
 
 const routes: Routes = [
-	{ path: '', component: WorldsComponent },
+	{ path: '', component: MainMenuComponent},
+	{ path: 'worlds', component: WorldsComponent },
 	{ path: 'animation', component: AnimationComponent },
 	{ path: 'info', component: AnimalInfoComponent}
 ];

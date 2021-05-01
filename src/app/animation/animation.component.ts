@@ -129,6 +129,6 @@ export class AnimationComponent {
   }
   
   returnToHub(){
-	  this.router.navigate([''])
+	  this.router.navigate(['worlds'])
   }
 }
