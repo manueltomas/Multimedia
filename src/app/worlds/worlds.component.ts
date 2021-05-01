@@ -35,7 +35,6 @@ export class WorldsComponent implements OnInit {
     this.source = source
     var videoAux : any = document.getElementById("video")
     this.video = videoAux;
-	this.video.play()
     this.changeVideo()
 	
   }
@@ -48,6 +47,7 @@ export class WorldsComponent implements OnInit {
     source.src = `assets/video/worlds/worlds${this.current}into.mp4`
     var aux2 = this
     video.onended = function(){
+      video.pause();
       aux2.worldService.changeAnimation(aux2.current);
       aux2.router.navigate(['animation']);
     }
@@ -102,7 +102,6 @@ export class WorldsComponent implements OnInit {
     var video : HTMLVideoElement = videoAux;
     var aux2 = this
     console.log(this.previous())
-    video.pause();
     if(this.rodandoDireita){
       console.log(`assets/video/worlds/worlds${this.previous()}${this.current}.mp4`)
       source.src = `assets/video/worlds/worlds${this.previous()}${this.current}.mp4`

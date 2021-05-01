@@ -18,6 +18,8 @@ export class AnimationComponent {
   title = 'Multimedia';
   audio;
   onTop;
+  rodandoDireita = false;
+  rodandoEsquerda = false;
   
   current;
 
@@ -36,7 +38,13 @@ export class AnimationComponent {
 	  if(this.current === undefined){
 	  	this.current =  1;
 	}
-	  
+  var videoAux : any = document.getElementById("video")
+  var video : HTMLVideoElement = videoAux;
+  var aux = this
+  video.onended = function(){
+    aux.changeVideo()
+    video.play();
+  }	  
     //console.log("Div in position (" + left + "," + top + ")");
     // window.onmousemove = function(e){
     //       x = e.clientX-left,
@@ -60,52 +68,8 @@ export class AnimationComponent {
     // };
   }
 
-  onClickImage(){
-    this.image = false;
-    this.video1 = true;
-    this.video2 = false;
-
-    setTimeout(this.startVideo1, 10);
-
-  }
-
-  onClickVideo1(){
-    this.image = false;
-    this.video1 = false;
-    this.video2 = true;
+  onClickVideo(){
     this.animalService.setCatched(1);
-    setTimeout(this.startVideo2, 10);
-  }
-
-  onClickVideo2(){
-    this.image = true;
-    this.video1 = false;
-    this.video2 = false;
-  }
-  startVideo1(){
-    var videoElem : any = document.getElementById("video1");
-    videoElem.play();
-  }
-
-  startVideo2(){
-    var videoElem : any = document.getElementById("video2");
-    videoElem.play();
-  }
-
-  image = true;
-  video1 = false;
-  video2 = false;
-
-  showImage(){
-    return this.image;
-  }
-
-  showVideo1(){
-    return this.video1;
-  }
-
-  showVideo2(){
-    return this.video2;
   }
 
   getImage(){
@@ -113,11 +77,19 @@ export class AnimationComponent {
   }
 
   anteriorIndice(){
-    this.current = ((this.current-1) % 5)
-    if(this.current == 0){
-      this.current = 4;
-    }
+    this.current = this.previous()
 	this.worldService.changeAnimation(this.current);
+  this.rodandoEsquerda = true;
+  this.changeVideo()
+  }
+  
+
+  previous(){
+    var result = ((this.current-1) % 5)
+    if(result <= 0){
+      result = 4;
+    }
+    return result;
   }
 
   proximoIndice(){
@@ -126,9 +98,57 @@ export class AnimationComponent {
       this.current++;
     }
 	this.worldService.changeAnimation(this.current);
+  this.rodandoDireita = true;
+  this.changeVideo()
   }
   
+  next(){
+    var result = ((this.current+1) % 5)
+    if(result <= 0){
+      result++;
+    }
+    return result;
+  }
+
   returnToHub(){
 	  this.router.navigate(['worlds'])
+  }
+
+  changeVideo(){
+    var sourceAux : any = document.getElementById("source")
+    var source : HTMLSourceElement = sourceAux
+    var videoAux : any = document.getElementById("video")
+    var video : HTMLVideoElement = videoAux;
+    var aux2 = this
+    if(this.rodandoDireita){
+      source.src = `assets/video/${this.worldService.getWorldById().name}/${this.previous()}${this.current}.mp4`
+      video.onended = function(){
+        source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
+        aux2.rodandoDireita = false
+        console.log(source.src)
+        video.load();
+        video.play()
+      }
+    }else if(this.rodandoEsquerda){
+      source.src = `assets/video/${this.worldService.getWorldById().name}/${this.next()}${this.current}.mp4`
+      video.onended = function(){
+        source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
+        aux2.rodandoEsquerda = false
+        console.log(source.src)
+        video.load();
+        video.play()
+      }
+    }else{
+      source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4` 
+      /*video.onended = function(){
+        source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
+        console.log(source.src)
+        video.load();
+        video.play()
+      }*/
+    }
+    video.load();
+    video.play()
+    console.log(source.src)
   }
 }
