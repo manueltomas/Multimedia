@@ -25,8 +25,8 @@ export class WorldsComponent implements OnInit {
 	  }
 	  console.log ("current ", this.current );
 
-     var videoAux : any = document.getElementById("video")
-     var video : HTMLVideoElement = videoAux
+    // var videoAux : any = document.getElementById("video")
+    // var video : HTMLVideoElement = videoAux
     // video.currentTime = 11.7206
     // var animation = video.animate(
     //   [
@@ -41,7 +41,7 @@ export class WorldsComponent implements OnInit {
     // animation.playbackRate = 1;
     // animation.play();
 
-    console.log(video)
+    /*console.log(video)
     var intervalRewind;
     video.currentTime = 11.7206;
     video.playbackRate = 1;
@@ -53,7 +53,7 @@ export class WorldsComponent implements OnInit {
        else{
            video.currentTime += -.01;
        }
-      },1);
+      },1);*/
   }
   
   chooseWorld(){
