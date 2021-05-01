@@ -41,8 +41,18 @@ export class WorldsComponent implements OnInit {
   }
   
   chooseWorld(){
-	  this.worldService.changeAnimation(1);
-	  this.router.navigate(['animation']);
+    var sourceAux : any = document.getElementById("source")
+    var source : HTMLSourceElement = sourceAux
+    var videoAux : any = document.getElementById("video")
+    var video : HTMLVideoElement = videoAux;
+    source.src = `assets/video/worlds/worlds${this.current}into.mp4`
+    var aux2 = this
+    video.onended = function(){
+      aux2.worldService.changeAnimation(aux2.current);
+      aux2.router.navigate(['animation']);
+    }
+    video.load()
+
   }
     
   getWorld(){
@@ -104,7 +114,7 @@ export class WorldsComponent implements OnInit {
         video.play()
       }
     }else if(this.rodandoEsquerda){
-      source.src = `assets/video/worlds/worlds${this.current}${this.next()}.mp4`
+      source.src = `assets/video/worlds/worlds${this.next()}${this.current}.mp4`
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
         aux2.rodandoEsquerda = false
@@ -114,13 +124,13 @@ export class WorldsComponent implements OnInit {
       }
     }else{
       source.src = `assets/video/worlds/worlds${this.current}.mp4` 
+      /*video.onended = function(){
+        source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
+        console.log(source.src)
+        video.load();
+        video.play()
+      }*/
     }
-    /*video.onended = function(){
-      source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
-      console.log(source.src)
-      video.load();
-      video.play()
-    }*/
     video.load();
     video.play()
     console.log(source.src)
