@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
 import { WORLDS } from '../mock-worlds';
@@ -11,7 +11,6 @@ import { WorldService } from '../world.service';
   styleUrls: ['./worlds.component.css']
 })
 export class WorldsComponent implements OnInit {
-  
   current;
   
   constructor(
@@ -25,6 +24,36 @@ export class WorldsComponent implements OnInit {
 	  	this.current =  1;
 	  }
 	  console.log ("current ", this.current );
+
+     var videoAux : any = document.getElementById("video")
+     var video : HTMLVideoElement = videoAux
+    // video.currentTime = 11.7206
+    // var animation = video.animate(
+    //   [
+    //     {currentTime: 11.7206},
+    //     {currentTime: 0}
+    //   ],
+    //   {
+    //     duration: 1
+    //   }
+    // )
+    // animation.currentTime = animation.effect.timing.duration / 2;
+    // animation.playbackRate = 1;
+    // animation.play();
+
+    console.log(video)
+    var intervalRewind;
+    video.currentTime = 11.7206;
+    video.playbackRate = 1;
+    intervalRewind = setInterval(function(){
+       if(video.currentTime == 0){
+           clearInterval(intervalRewind);
+           video.pause();
+       }
+       else{
+           video.currentTime += -.01;
+       }
+      },1);
   }
   
   chooseWorld(){
