@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
-import { WORLDS } from '../mock-worlds';
 import { WorldService } from '../world.service';
 
 
@@ -11,10 +10,13 @@ import { WorldService } from '../world.service';
   styleUrls: ['./worlds.component.css']
 })
 export class WorldsComponent implements OnInit {
-  current;
-  source : HTMLSourceElement;
-  video : HTMLVideoElement;
 
+  //var that contains current world being shown
+  current;
+
+  //these two boolean vars are used when a transition between worlds (camera rotating) is hapening
+  //when "rodandoEsquerda" is true it means we are turning left and when "rodandoDireita" is true
+  //it means we are turning right
   rodandoEsquerda;
   rodandoDireita;
 
@@ -24,21 +26,27 @@ export class WorldsComponent implements OnInit {
 	private animalService : AnimalService) { }
 
   ngOnInit(): void {
-	this.current = this.worldService.worldNumber;
-	if(this.current === 0){
-		this.current =  1;
-	}
-	this.worldService.changeWorld(this.current)
-	this.animalService.refresh();
 
-    var source : any = document.getElementById("source")
-    this.source = source
-    var videoAux : any = document.getElementById("video")
-    this.video = videoAux;
+    //this is used to restore the world being shown when the user returns from another page
+    this.current = this.worldService.worldNumber;
+    if(this.current === 0){
+      this.current =  1;
+    }
+    this.worldService.changeWorld(this.current)
+
+    //this is used to let the animalService know that the value in worldService has changed
+    this.animalService.refresh();
+
+    //this calls the method that load the right video
     this.changeVideo()
 	
   }
   
+  /**
+   * This method is called when the user clicks the button to choose the world
+   * It loads the video walking in the direction of the world and, on it ends, changes
+   * to the animation page
+   */
   chooseWorld(){
     var sourceAux : any = document.getElementById("source")
     var source : HTMLSourceElement = sourceAux
@@ -54,15 +62,26 @@ export class WorldsComponent implements OnInit {
     video.load()
 
   }
-    
-  getWorld(){
+
+  //This method was used when the world showed a picture
+  /* getWorld(){
     return `assets/img/${this.worldService.getWorldById().name}HubWorld.png`
-  }
+  }*/
   
+  /**
+   * This methods gets and returns the name of the world being shown
+   * @returns The name of the world that is being shown
+   */
   getWorldName(){
 	 return this.worldService.getWorldById().name
   }
 
+  /**
+   * This method is called when the user clicks the left arrow button
+   * It changes the "current" variable to the previous world index, "notifies" the
+   * world and animal Services of this change, changes the value of the variable "rodandoEsquerda" to true
+   * and calls "changeVideo()"
+   */
   previousWorld(){
     this.current = this.previous()
     this.worldService.changeWorld(this.current)
@@ -71,6 +90,10 @@ export class WorldsComponent implements OnInit {
     this.changeVideo()
   }
 
+  /**
+   * This method calculates the previous world index
+   * @returns The previous world index
+   */
   previous(){
     var result = ((this.current-1) % 4)
     if(result <= 0){
@@ -79,6 +102,12 @@ export class WorldsComponent implements OnInit {
     return result;
   }
 
+  /**
+   * This method is called when the user clicks the right arrow button
+   * It changes the "current" variable to the next world index, "notifies" the
+   * world and animal Services of this change, changes the value of the variable "rodandoDireita" to true
+   * and calls "changeVideo()"
+   */
   nextWorld(){
     this.current = this.next()
     this.worldService.changeWorld(this.current)
@@ -87,6 +116,10 @@ export class WorldsComponent implements OnInit {
     this.changeVideo()
   }
 
+  /**
+   * This method calculates the next world index
+   * @returns The next world index
+   */
   next(){
     var result = ((this.current+1) % 4)
     if(result <= 0){
@@ -95,6 +128,15 @@ export class WorldsComponent implements OnInit {
     return result;
   }
 
+  /**
+   * This method changes the video being presented to the user
+   * It first verifies if "rodandoDireita" or "rodandoEsquerda" are true and
+   * if one of them is true, it change to the video transition between the previous video being shown
+   * and the video that is going to be shown and adds a listener to its end. When the video ends it
+   * changes to the new video being shown
+   * If none of them are true, the method simply set the video to be the current one
+   * At the end of the method video.load() and video.play() are called to make the video be shown and played
+   */
   changeVideo(){
     var sourceAux : any = document.getElementById("source")
     var source : HTMLSourceElement = sourceAux
@@ -135,7 +177,11 @@ export class WorldsComponent implements OnInit {
     console.log(source.src)
   }
   
+  /**
+   * This method is called when the user clicks the back button
+   * It simply navigates to the main menu
+   */
   backToMainMenu(){
-	this.router.navigate([''])
+	  this.router.navigate([''])
   }
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
-import { AppComponent } from '../app.component';
 import { AnimalInfoService } from '../animal-info.service';
 
 @Component({
@@ -14,69 +12,50 @@ export class AnimalListComponent implements OnInit {
 
 
   constructor(
-	private router : Router,
-    private route : ActivatedRoute,
+	  private router : Router,
     public animalService : AnimalService,
-	private animalInfoService: AnimalInfoService
+	  private animalInfoService: AnimalInfoService
   ) { }
 
   ngOnInit() {
-    var animals = document.getElementsByClassName("animal")
+    //this calls the showWorld method
     this.animalService.showWorld();
   }
 
-  getColumn(a){
-    var i = 0;
-    for(i = 0; i < this.animalService.getAnimals().length; i++){
-      if(a == this.animalService.getAnimals()[i]){
-        if(i % 2 == 0){
-          console.log(`${a} : column 1`)
-          return 1;
-        }else{
-          console.log(`${a} : column 1`)
-          return 2;
-        }
-      }
-    }
-  }
-
-  getRow(a){
-    var i = 0;
-    for(i = 0; i < this.animalService.getAnimals().length; i++){
-      if(a == this.animalService.getAnimals()[i]){
-        console.log(`${a} : row ${i%2+1}`)
-        return i % 2 == 0 ? i / 2 + 1 : (i-1)/2+1
-      }
-    }
-  }
-  getStyle(a){
-    let aux = {
-      gridColumn: this.getColumn(a),
-      gridRow: this.getRow(a)
-    }
-    return aux;
-  }
-
-  getImageStyle(a){
-    if(a.catched){
-      return {}
-    }
-  }
-
+  /**
+   * This method remove the class "animalImg" from the animal given in the parameter name and adds the class "animalImgCatched"
+   * This solely means that the animal image is not greyed out anymore 
+   * @param name The name of the animal that was caught
+   */
   animalCatched(name){
     var animal = document.getElementsByClassName(name)[0];
     animal.classList.remove("animalImg");
     animal.classList.add("animalImgCatched");
   }
 
+  /**
+   * This method is called when the user clicks the "Local" button
+   * It changes the list of animals being shown (which is inside of animalService) so that it only contains the animals
+   * from this world. This is done via a method inside animalService
+   */
   showLocalAnimals(){
     this.animalService.showWorld();
   }
 
+  /**
+   * This method is called when the user clicks the "Global" button
+   * It changes the list of animals being shown (which is inside of animalService) so that it contains all animals.
+   * This is done via a method inside animalService
+   */
   showAllAnimals(){
     this.animalService.showAll();
   }
   
+  /**
+   * This method is called when the user clicks on an animal
+   * It "notifies" the animalInfoService what animal was clicked and changes to the animalInfo page
+   * @param a The animal that was clicked
+   */
   onClickAnimal(a){
 	if(a.catched){
 		this.animalInfoService.changeAnimal(a);
