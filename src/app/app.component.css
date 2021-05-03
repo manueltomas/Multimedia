@@ -10,6 +10,22 @@
   height: 100%;
 }
 
+.master-full{
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 0% 100% 0%;
+  grid-template-areas: 
+    "header sidebar"
+    "main sidebar"
+    "footer sidebar";
+  width: 100%;
+  height: 100%;
+}
+
+.hide{
+  display: none;
+}
+
 #col1{
   width: 100%;
   height: 100%;

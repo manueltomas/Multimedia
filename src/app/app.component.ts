@@ -1,17 +1,31 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { SharedService } from './services/shared-service.service';
 
 var x : number;
 var y : number;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [SharedService]
 })
 export class AppComponent {
   @ViewChild('video1') myVideo: ElementRef;
   title = 'Multimedia';
   audio;
   onTop;
+  showAnimalList = true; 
+  mainContainerStyle = "master"
+  constructor( 
+      private _sharedService: SharedService
+    ){
+      this._sharedService.changeEmitted$.subscribe(
+        value => {
+          this.mainContainerStyle = value? "master" : "master-full";
+          this.showAnimalList = value;
+          document.getElementById('container').className = this.mainContainerStyle
+        });
+    }
 
   ngOnInit(){
     var offsets = document.getElementById('imageContainer').getBoundingClientRect();

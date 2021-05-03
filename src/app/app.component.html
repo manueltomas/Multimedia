@@ -2,7 +2,7 @@
   <title>Test Sound</title>
 </head>
 <body>
-  <div class="master">
+  <div id="container" class="master">
     <div id="col1-header">
       <img src="\assets\img\top_border_image.png">
     </div>
@@ -12,6 +12,6 @@
     <div id="col1-footer">
       <img src="\assets\img\button_border_image.png">
     </div>
-    <app-animal-list id="col2"></app-animal-list>
+    <app-animal-list *ngIf="showAnimalList" id="col2"></app-animal-list>
   </div>
 </body>
