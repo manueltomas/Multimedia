@@ -10,6 +10,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimalInfoComponent } from './animal-info/animal-info.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { FormsModule, NgForm } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
   	MatTooltipModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

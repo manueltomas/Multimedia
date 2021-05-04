@@ -1,2 +1,21 @@
 <p>{{getCurrAnimalName()}}</p>
 <button (click)="closeInfoPage()"> Close </button>
+<div>
+    <p>
+        {{subtitles}}
+    </p>
+</div>
+<div class="master">
+    <div>
+        <select name="language" [(ngModel)]="language" (change)="changedLang()">
+            <option value="Portuguese">Português</option>
+            <option value="English">English</option>
+        </select>
+    </div>
+    <div>
+        <video id="animalVideo" controls (timeupdate)="timeUpdate($event)">
+            <source src="{{getVideoUrl()}}" type="video/mp4">
+        </video>
+    </div>
+    
+</div>
