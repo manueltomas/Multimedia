@@ -48,7 +48,8 @@ export class AnimationComponent {
     var aux = this
     video.onended = function(){
       aux.changeVideo()
-      video.play();
+      video.currentTime = 0;
+      video.play()
     }	  
       //console.log("Div in position (" + left + "," + top + ")");
       // window.onmousemove = function(e){
@@ -77,7 +78,21 @@ export class AnimationComponent {
    * This method is called when the user clicks on the video
    */
   onClickVideo(){
-    this.animalService.setCatched(1);
+    var sourceAux : any = document.getElementById("source")
+    var source : HTMLSourceElement = sourceAux
+    var videoAux : any = document.getElementById("video")
+    var video : HTMLVideoElement = videoAux;
+    var aux2 = this
+    var last = source.src;
+    source.src = `assets/video/${this.worldService.getWorldById().name}/catch1.mp4`
+    video.load();
+    video.play()
+    video.onended = function(){
+      aux2.animalService.setCatched(1);
+      source.src = last;
+      video.load();
+      video.play()
+    }
   }
 
   /**
@@ -159,20 +174,30 @@ export class AnimationComponent {
     if(this.rodandoDireita){
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.previous()}${this.current}.mp4`
       video.onended = function(){
-        source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
-        aux2.rodandoDireita = false
-        console.log(source.src)
-        video.load();
-        video.play()
+        if(aux2.rodandoDireita){
+          source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
+          aux2.rodandoDireita = false
+          console.log(source.src)
+          video.load();
+          video.play()
+        }else{
+          video.currentTime = 0;
+          video.play();
+        }
       }
     }else if(this.rodandoEsquerda){
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.next()}${this.current}.mp4`
       video.onended = function(){
-        source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
-        aux2.rodandoEsquerda = false
-        console.log(source.src)
-        video.load();
-        video.play()
+        if(aux2.rodandoEsquerda){
+          source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
+          aux2.rodandoEsquerda = false
+          console.log(source.src)
+          video.load();
+          video.play()
+        }else{
+          video.currentTime = 0;
+          video.play();
+        }
       }
     }else{
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4` 
