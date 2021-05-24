@@ -1,11 +1,11 @@
 <div class="image imageDiv">
-    <div id="botaoAnt">
+    <div id="botaoAnt" *ngIf="!changing">
         <button (click)="anteriorIndice()" class="botaoAnterior"> <  </button>
     </div>
-    <div id="botaoNxt">
+    <div id="botaoNxt" *ngIf="!changing">
         <button (click)="proximoIndice()" class="botaoSeguinte"> > </button>
     </div>
-	<div id="botaoReturnHub">
+	<div id="botaoReturnHub" *ngIf="!changing">
 		<button (click)="returnToHub()" mat-raised-button #tooltip="matTooltip" matTooltip="Go back to hub world" matTooltipHideDelay="100000" class="returnToHub"> < </button>
 	</div>
     <div id="videoContainer">

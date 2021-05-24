@@ -25,6 +25,8 @@ export class AnimationComponent {
   //TODO: this variable is not being used, but it is planned to be used when the audio is added
   audio;
 
+  changing = true;
+
   constructor(
 	private router : Router,
     private worldService : WorldService,
@@ -47,6 +49,7 @@ export class AnimationComponent {
     var video : HTMLVideoElement = videoAux;
     var aux = this
     video.onended = function(){
+      aux.changing = false;
       aux.changeVideo()
       video.currentTime = 0;
       video.play()
@@ -78,6 +81,7 @@ export class AnimationComponent {
    * This method is called when the user clicks on the video
    */
   onClickVideo(){
+    this.changing = true;
     var sourceAux : any = document.getElementById("source")
     var source : HTMLSourceElement = sourceAux
     var videoAux : any = document.getElementById("video")
@@ -92,6 +96,7 @@ export class AnimationComponent {
       source.src = last;
       video.load();
       video.play()
+      aux2.changing = false;
     }
   }
 
@@ -105,6 +110,7 @@ export class AnimationComponent {
     this.current = this.previous()
     this.worldService.changeAnimation(this.current);
     this.rodandoEsquerda = true;
+    this.changing = true;
     this.changeVideo()
   }
   
@@ -133,6 +139,7 @@ export class AnimationComponent {
     }
     this.worldService.changeAnimation(this.current);
     this.rodandoDireita = true;
+    this.changing = true;
     this.changeVideo()
   }
   
@@ -184,6 +191,7 @@ export class AnimationComponent {
           video.currentTime = 0;
           video.play();
         }
+        aux2.changing = false;
       }
     }else if(this.rodandoEsquerda){
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.next()}${this.current}.mp4`
@@ -198,6 +206,7 @@ export class AnimationComponent {
           video.currentTime = 0;
           video.play();
         }
+        aux2.changing = false;
       }
     }else{
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4` 
