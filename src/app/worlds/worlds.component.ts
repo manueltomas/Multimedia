@@ -20,6 +20,8 @@ export class WorldsComponent implements OnInit {
   rodandoEsquerda;
   rodandoDireita;
 
+  changing = false;
+
   constructor(
 	private router : Router,
 	private worldService : WorldService,
@@ -85,8 +87,8 @@ export class WorldsComponent implements OnInit {
   previousWorld(){
     this.current = this.previous()
     this.worldService.changeWorld(this.current)
-    this.animalService.refresh();
     this.rodandoEsquerda = true;
+    this.changing = true;
     this.changeVideo()
   }
 
@@ -111,8 +113,8 @@ export class WorldsComponent implements OnInit {
   nextWorld(){
     this.current = this.next()
     this.worldService.changeWorld(this.current)
-    this.animalService.refresh();
     this.rodandoDireita = true
+    this.changing = true;
     this.changeVideo()
   }
 
@@ -150,6 +152,8 @@ export class WorldsComponent implements OnInit {
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
         aux2.rodandoDireita = false
+        aux2.changing = false;
+        aux2.animalService.refresh();
         console.log(source.src)
         video.load();
         video.play()
@@ -159,6 +163,8 @@ export class WorldsComponent implements OnInit {
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
         aux2.rodandoEsquerda = false
+        aux2.changing = false;
+        aux2.animalService.refresh();
         console.log(source.src)
         video.load();
         video.play()

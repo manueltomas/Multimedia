@@ -2,10 +2,10 @@
 	<video class="video" id="video" autoplay="true"> <!-- autoplay -->
 		<source id="source" src="assets/video/worlds/world1.mp4" type="video/mp4">
 	</video>
-	<div id="ui">
+	<div id="ui" *ngIf="!changing">
 		<div id="top">
 			<div>
-				<button (click)="backToMainMenu()" class="back-button"></button>
+				<button (click)="backToMainMenu()" mat-raised-button #tooltip="matTooltip" matTooltip="Go back to main menu" matTooltipHideDelay="100" class="back-button"></button>
 			</div>
 			<div id="worldTitle">
 				<h1 class="title">Choose a Location</h1>
