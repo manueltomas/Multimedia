@@ -21,6 +21,7 @@ export class WorldsComponent implements OnInit {
   rodandoDireita;
 
   changing = false;
+  url;
 
   constructor(
 	private router : Router,
@@ -52,14 +53,16 @@ export class WorldsComponent implements OnInit {
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
     source.src = `assets/video/worlds/worlds${this.current}into.mp4`
+	this.url = source.src
     var aux2 = this
     video.onended = function(){
       //video.pause();
-      aux2.worldService.changeAnimation(aux2.current);
+	  aux2.worldService.changeAnimation(0)
       aux2.router.navigate(['animation']);
     }
+	
     video.load()
-
+	
   }
 
   //This method was used when the world showed a picture
@@ -143,40 +146,51 @@ export class WorldsComponent implements OnInit {
     var video : HTMLVideoElement = videoAux;
     var aux2 = this
     console.log(this.previous())
+	
     if(this.rodandoDireita){
       console.log(`assets/video/worlds/worlds${this.previous()}${this.current}.mp4`)
       source.src = `assets/video/worlds/worlds${this.previous()}${this.current}.mp4`
+	  this.url = source.src
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
+		aux2.url = source.src
         aux2.rodandoDireita = false
         aux2.changing = false;
         aux2.animalService.refresh();
         console.log(source.src)
-        video.load();
+        video.load()
         video.play()
       }
+	  video.load()
+	  video.play()
+	  
     }else if(this.rodandoEsquerda){
       source.src = `assets/video/worlds/worlds${this.next()}${this.current}.mp4`
+	  this.url = source.src
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
+		aux2.url = source.src
         aux2.rodandoEsquerda = false
         aux2.changing = false;
         aux2.animalService.refresh();
         console.log(source.src)
-        video.load();
+        video.load()
         video.play()
       }
+	    video.load()
+		video.play()
+		
     }else{
       source.src = `assets/video/worlds/worlds${this.current}.mp4` 
+	  this.url = source.src
+
       video.onended = function(){
         aux2.animalService.refresh();
 		video.currentTime = 0;
         video.play()
       }
     }
-    video.load();
-    video.play()
-    console.log(source.src)
+	
   }
   
   /**
@@ -185,5 +199,9 @@ export class WorldsComponent implements OnInit {
    */
   backToMainMenu(){
 	  this.router.navigate([''])
+  }
+  
+  getVideoUrl(){
+    return this.url
   }
 }

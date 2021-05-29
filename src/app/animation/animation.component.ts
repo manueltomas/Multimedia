@@ -26,6 +26,7 @@ export class AnimationComponent {
   audio;
 
   changing = true;
+  url;
 
   constructor(
 	private router : Router,
@@ -40,8 +41,9 @@ export class AnimationComponent {
 	
     //this is used to restore the world being shown when the user returns from another page
     this.current = this.worldService.animationNumber;
-      if(this.current === undefined){
-        this.current =  1;
+	console.log(this.current)
+    if(this.current === 0){
+		this.arriveNewWorldVideo()
     }
 
     //this gets the video element and sets a onended listener that calls the "changeVideo()" function and plays the video afterwards
@@ -87,6 +89,7 @@ export class AnimationComponent {
     var aux2 = this
     var last = source.src;
     source.src = `assets/video/${this.worldService.getWorldById().name}/catch1.mp4`
+	this.url = source.src
     video.load();
     video.play()
     video.onended = function(){
@@ -158,7 +161,11 @@ export class AnimationComponent {
    * It simply navigates to the world choice menu
    */
   returnToHub(){
-	  this.router.navigate(['worlds'])
+      var videoAux : any = document.getElementById("video")
+      var video : HTMLVideoElement = videoAux
+	  var aux2 = this
+	  aux2.worldService.changeAnimation(0)
+	  aux2.router.navigate(['worlds'])
   }
 
   /**
@@ -178,9 +185,11 @@ export class AnimationComponent {
     var aux2 = this
     if(this.rodandoDireita){
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.previous()}${this.current}.mp4`
-      video.onended = function(){
+      this.url = source.src
+	  video.onended = function(){
         if(aux2.rodandoDireita){
           source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
+		  aux2.url = source.src
           aux2.rodandoDireita = false
           console.log(source.src)
           video.load();
@@ -193,9 +202,11 @@ export class AnimationComponent {
       }
     }else if(this.rodandoEsquerda){
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.next()}${this.current}.mp4`
-      video.onended = function(){
+      this.url = source.src
+	  video.onended = function(){
         if(aux2.rodandoEsquerda){
           source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
+		  aux2.url = source.src
           aux2.rodandoEsquerda = false
           console.log(source.src)
           video.load();
@@ -207,16 +218,33 @@ export class AnimationComponent {
         aux2.changing = false;
       }
     }else{
-      source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4` 
-      /*video.onended = function(){
-        source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
-        console.log(source.src)
+      source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
+	  this.url = source.src
+      video.onended = function(){
+		video.currentTime = 0;
         video.load();
         video.play()
-      }*/
+      }
     }
-    video.load();
+	
+    video.load()
     video.play()
     console.log(source.src)
+  }
+  
+  arriveNewWorldVideo(){
+	var sourceAux : any = document.getElementById("source")
+    var source : HTMLSourceElement = sourceAux
+    var videoAux : any = document.getElementById("video")
+    var video : HTMLVideoElement = videoAux;
+	source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
+	this.url = source.src
+	
+	this.current =  1;
+	this.worldService.changeAnimation(this.current)
+  }
+  
+  getVideoUrl(){
+    return this.url
   }
 }
