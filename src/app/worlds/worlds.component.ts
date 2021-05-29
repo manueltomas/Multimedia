@@ -34,10 +34,7 @@ export class WorldsComponent implements OnInit {
     if(this.current === 0){
       this.current =  1;
     }
-    this.worldService.changeWorld(this.current)
-
-    //this is used to let the animalService know that the value in worldService has changed
-    this.animalService.refresh();
+    this.worldService.changeWorld(this.current)    
 
     //this calls the method that load the right video
     this.changeVideo()
@@ -171,12 +168,12 @@ export class WorldsComponent implements OnInit {
       }
     }else{
       source.src = `assets/video/worlds/worlds${this.current}.mp4` 
-      /*video.onended = function(){
+      video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
-        console.log(source.src)
+        aux2.animalService.refresh();
         video.load();
         video.play()
-      }*/
+      }
     }
     video.load();
     video.play()
