@@ -54,7 +54,7 @@ export class WorldsComponent implements OnInit {
     source.src = `assets/video/worlds/worlds${this.current}into.mp4`
     var aux2 = this
     video.onended = function(){
-      video.pause();
+      //video.pause();
       aux2.worldService.changeAnimation(aux2.current);
       aux2.router.navigate(['animation']);
     }
@@ -169,9 +169,8 @@ export class WorldsComponent implements OnInit {
     }else{
       source.src = `assets/video/worlds/worlds${this.current}.mp4` 
       video.onended = function(){
-        source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
         aux2.animalService.refresh();
-        video.load();
+		video.currentTime = 0;
         video.play()
       }
     }

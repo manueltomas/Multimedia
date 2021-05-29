@@ -51,8 +51,6 @@ export class AnimationComponent {
     video.onended = function(){
       aux.changing = false;
       aux.changeVideo()
-      video.currentTime = 0;
-      video.play()
     }	  
       //console.log("Div in position (" + left + "," + top + ")");
       // window.onmousemove = function(e){
