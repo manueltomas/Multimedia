@@ -6,7 +6,7 @@ import { WORLDS } from './mock-worlds';
 })
 export class WorldService {
 
-  worldNumber = 1;
+  worldNumber = 0;
   animationNumber = 1;
   
   constructor() { }

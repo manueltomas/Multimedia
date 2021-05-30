@@ -23,6 +23,8 @@ export class WorldsComponent implements OnInit {
   changing = false;
   url;
 
+  entering = 0;
+
   constructor(
 	private router : Router,
 	private worldService : WorldService,
@@ -32,7 +34,9 @@ export class WorldsComponent implements OnInit {
 
     //this is used to restore the world being shown when the user returns from another page
     this.current = this.worldService.worldNumber;
-    if(this.current === 0){
+    if(this.current !== 0){
+      this.entering = this.current;
+    }else{
       this.current =  1;
     }
     this.worldService.changeWorld(this.current)    
@@ -205,13 +209,14 @@ export class WorldsComponent implements OnInit {
   
   timeUpdate(time){
     console.log(time.target.currentTime)
+    console.log("entering: " + this.entering)
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
-    if(this.current == 0 && Math.abs(time.target.currentTime - video.duration) < 0.001){
-      this.current = 1;
+    if(this.entering != 0 && Math.abs(time.target.currentTime - video.duration) < 0.001){
+      //this.current = 1;
       this.url = `assets/video/worlds/worlds${this.current}.mp4` 
       video.currentTime = 0;
-	  this.changing = false;
+	    this.changing = false;
       video.load();
       video.play()
     }
