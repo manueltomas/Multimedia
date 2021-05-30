@@ -248,11 +248,8 @@ export class AnimationComponent {
     if(this.current == 0 && Math.abs(time.target.currentTime - video.duration) < 0.001){
       console.log("im here")
       this.current = 1;
-      this.url = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
-      video.currentTime = 0;
       this.changing = false;
-      video.load();
-      video.play()
+      this.changeVideo();
     }
   }
   
