@@ -148,9 +148,11 @@ export class WorldsComponent implements OnInit {
     console.log(this.previous())
 	
     if(this.rodandoDireita){
+		
       console.log(`assets/video/worlds/worlds${this.previous()}${this.current}.mp4`)
       source.src = `assets/video/worlds/worlds${this.previous()}${this.current}.mp4`
 	  this.url = source.src
+	  
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
 		aux2.url = source.src
@@ -177,9 +179,17 @@ export class WorldsComponent implements OnInit {
         video.load()
         video.play()
       }
-	    video.load()
-		video.play()
-		
+	  video.load()
+	  video.play()
+	}else if(this.changing){
+		this.url = `assets/video/worlds/worlds${this.current}.mp4` 
+		video.onended = function(){
+			aux2.current = 1;
+			aux2.url = `assets/video/worlds/worlds${aux2.current}.mp4` 
+			video.currentTime = 0;
+			video.load()
+			video.play()
+		}
     }else{
       source.src = `assets/video/worlds/worlds${this.current}.mp4` 
 	  this.url = source.src
@@ -189,8 +199,22 @@ export class WorldsComponent implements OnInit {
 		video.currentTime = 0;
         video.play()
       }
+	  video.play();
     }
-	
+  }
+  
+  timeUpdate(time){
+    console.log(time.target.currentTime)
+    var videoAux : any = document.getElementById("video")
+    var video : HTMLVideoElement = videoAux;
+    if(this.current == 0 && Math.abs(time.target.currentTime - video.duration) < 0.001){
+      this.current = 1;
+      this.url = `assets/video/worlds/worlds${this.current}.mp4` 
+      video.currentTime = 0;
+	  this.changing = false;
+      video.load();
+      video.play()
+    }
   }
   
   /**

@@ -1,5 +1,5 @@
 <div id="container">
-	<video class="video" id="video" autoplay="true"> <!-- autoplay -->
+	<video class="video" id="video" autoplay="true" (timeupdate)="timeUpdate($event)"> <!-- autoplay -->
 		<source id="source" src="{{getVideoUrl()}}" type="video/mp4">
 	</video>
 	<div id="ui" *ngIf="!changing">
