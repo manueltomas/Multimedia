@@ -42,18 +42,13 @@ export class AnimationComponent {
     //this is used to restore the world being shown when the user returns from another page
     this.current = this.worldService.animationNumber;
 	console.log(this.current)
-    if(this.current === 0){
+    /*if(this.current === 0){
 		this.arriveNewWorldVideo()
-    }
+    }*/
+    this.changeVideo();
 
     //this gets the video element and sets a onended listener that calls the "changeVideo()" function and plays the video afterwards
-    var videoAux : any = document.getElementById("video")
-    var video : HTMLVideoElement = videoAux;
-    var aux = this
-    video.onended = function(){
-      aux.changing = false;
-      aux.changeVideo()
-    }	  
+      
       //console.log("Div in position (" + left + "," + top + ")");
       // window.onmousemove = function(e){
       //       x = e.clientX-left,
@@ -163,9 +158,8 @@ export class AnimationComponent {
   returnToHub(){
       var videoAux : any = document.getElementById("video")
       var video : HTMLVideoElement = videoAux
-	  var aux2 = this
-	  aux2.worldService.changeAnimation(0)
-	  aux2.router.navigate(['worlds'])
+	  this.worldService.changeAnimation(0)
+	  this.router.navigate(['worlds'])
   }
 
   /**
@@ -185,13 +179,13 @@ export class AnimationComponent {
     var aux2 = this
     if(this.rodandoDireita){
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.previous()}${this.current}.mp4`
-      this.url = source.src
-	  video.onended = function(){
+      this.url = `assets/video/${this.worldService.getWorldById().name}/${this.previous()}${this.current}.mp4`
+	    video.onended = function(){
         if(aux2.rodandoDireita){
           source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
-		  aux2.url = source.src
+		      aux2.url = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
           aux2.rodandoDireita = false
-          console.log(source.src)
+          console.log(aux2.url)
           video.load();
           video.play()
         }else{
@@ -200,15 +194,17 @@ export class AnimationComponent {
         }
         aux2.changing = false;
       }
+      video.load()
+      video.play()
     }else if(this.rodandoEsquerda){
       source.src = `assets/video/${this.worldService.getWorldById().name}/${this.next()}${this.current}.mp4`
-      this.url = source.src
+      this.url = `assets/video/${this.worldService.getWorldById().name}/${this.next()}${this.current}.mp4`
 	  video.onended = function(){
         if(aux2.rodandoEsquerda){
           source.src = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
-		  aux2.url = source.src
+		      aux2.url = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
           aux2.rodandoEsquerda = false
-          console.log(source.src)
+          console.log(aux2.url)
           video.load();
           video.play()
         }else{
@@ -217,32 +213,68 @@ export class AnimationComponent {
         }
         aux2.changing = false;
       }
-    }else{
-      source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
-	  this.url = source.src
+      video.load()
+		  video.play()
+    }else if(this.changing){
+      console.log("im here")
+      this.url = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
       video.onended = function(){
-		video.currentTime = 0;
+        console.log("im here")
+        aux2.current = 1;
+        aux2.url = `assets/video/${aux2.worldService.getWorldById().name}/${aux2.current}.mp4`
+		    video.currentTime = 0;
         video.load();
         video.play()
       }
+      console.log(video.onended)
+    }else{
+      source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
+	    this.url = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
+      video.onended = function(){
+		    video.currentTime = 0;
+        video.load();
+        video.play()
+      }
+      video.play();
     }
-	
-    video.load()
-    video.play()
-    console.log(source.src)
+    console.log(aux2.url)
   }
-  
-  arriveNewWorldVideo(){
-	var sourceAux : any = document.getElementById("source")
-    var source : HTMLSourceElement = sourceAux
+
+  timeUpdate(time){
+    console.log(time.target.currentTime)
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
-	source.src = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
-	this.url = source.src
-	
-	this.current =  1;
-	this.worldService.changeAnimation(this.current)
+    console.log(video.duration);
+    if(this.current == 0 && Math.abs(time.target.currentTime - video.duration) < 0.001){
+      console.log("im here")
+      this.current = 1;
+      this.url = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
+      video.currentTime = 0;
+      this.changing = false;
+      video.load();
+      video.play()
+    }
   }
+  
+  /*arriveNewWorldVideo(){
+    var videoAux : any = document.getElementById("video")
+    var video : HTMLVideoElement = videoAux;
+    var aux = this
+    video.onloadstart = function(){
+      console.log("im here")
+      video.onended = function(){
+        console.log("im here")
+        aux.changing = false;
+        aux.current =  1;
+        aux.worldService.changeAnimation(aux.current)
+        aux.changeVideo()
+      }	
+    }
+    this.url = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
+    console.log(this.url)
+    
+    
+  }*/
   
   getVideoUrl(){
     return this.url
