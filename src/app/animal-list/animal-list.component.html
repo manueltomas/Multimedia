@@ -1,11 +1,13 @@
 <div id="enclosing">
     <div id="animals">
         <div id="header">
-            <div (click)="showLocalAnimals()" class="list-btn selected">
-                <a>Local</a>
-            </div>
-            <div (click)="showAllAnimals()" class="list-btn">
-                <a>Global</a>
+            <div class="list-btns">
+                <div (click)="showLocalAnimals()" class="list-btn selected">
+                    <a>Local</a>
+                </div>
+                <div (click)="showAllAnimals()" class="list-btn">
+                    <a>Global</a>
+                </div>
             </div>
             <img src="\assets\icons\animals-list-icon.png">
         </div>

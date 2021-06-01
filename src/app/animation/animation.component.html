@@ -1,4 +1,10 @@
 <div class="image imageDiv">
+    <div id="videoContainer">
+        <video class="video" id="video" autoplay="true" (timeupdate)="timeUpdate($event)">
+			<source id="source" src="{{getVideoUrl()}}" type="video/mp4">
+        </video>
+        <span (click)="onClickVideo()"></span>
+    </div>
     <div id="botaoAnt" *ngIf="!changing">
         <button (click)="anteriorIndice()" class="botaoAnterior"> <  </button>
     </div>
@@ -8,9 +14,4 @@
 	<div id="botaoReturnHub" *ngIf="!changing">
 		<button (click)="returnToHub()" mat-raised-button #tooltip="matTooltip" matTooltip="Go back to hub world" matTooltipHideDelay="100000" class="returnToHub"> < </button>
 	</div>
-    <div id="videoContainer">
-        <video class="image" id="video" autoplay="true" (timeupdate)="timeUpdate($event)" (click)="onClickVideo()">
-			<source id="source" src="{{getVideoUrl()}}" type="video/mp4">
-        </video>
-    </div>
 </div>

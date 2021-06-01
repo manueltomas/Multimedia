@@ -20,14 +20,17 @@
     background-color: #D6BA8F;
     grid-area: header;
     border: 2px solid black;
-    border-radius: 50px 0px 0px 0px;
+    border-radius: 15px 0px 0px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 #main{
-    background-image: url("/assets/img/animals-list-bg2.PNG");
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* background-image: url("/assets/img/animals-list-bg2.PNG"); */
+    background-color: #33230966;
     filter: grayscale(60%);
     background-size: cover;
     grid-area: animals;
@@ -36,17 +39,19 @@
     padding: 5px;
 
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 100%;
     grid-gap: 3px;
     /* align-items: center; */
     justify-content: center;
+    justify-items: center;
+    align-content: start;
 }
 
 #footer{
     background-color: #D6BA8F;
     grid-area: footer;
     border: 2px solid black;
-    border-radius: 0px 0px 0px 50px;
+    border-radius: 0px 0px 0px 15px;
 }
 
 #bar{
@@ -57,6 +62,7 @@
 }
 
 .animal {
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,18 +89,19 @@
 
 #header img{
     width: auto;
-    height: 90%;
+    height: 70%;
 }
 
 .list-btn{
-    margin-top: 1.5vh;
-    margin-left: 1vw;
+    font-weight: 500;
+    margin-top: 0.3em;
+    margin-left: 0vw;
     border: 2px solid black;
-    border-radius: 15px;
+    border-radius: 7px;
     background-color: #9D7760;
-    font-size: 1.5vw;
+    font-size: 0.85em;
     text-align: center;
-    padding: 5px 10px;
+    padding: 3px 20px;
     cursor: pointer;
     opacity: 0.8;
     box-shadow: 0px 2px 10px #7a5843;
@@ -106,6 +113,6 @@
 }
 
 .list-btn.selected{
-    background-color: #7a5843;
+    background-color: #c9b2a4;
     opacity: 1;
 }
