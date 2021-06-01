@@ -52,15 +52,13 @@ export class WorldsComponent implements OnInit {
    * to the animation page
    */
   chooseWorld(){
-    var sourceAux : any = document.getElementById("source")
-    var source : HTMLSourceElement = sourceAux
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
-    source.src = `assets/video/worlds/worlds${this.current}into.mp4`
-	this.url = source.src
+	this.url = `assets/video/worlds/worlds${this.current}into.mp4`
+	this.entering = 0
     var aux2 = this
     video.onended = function(){
-      //video.pause();
+	  console.log("A")
 	  aux2.worldService.changeAnimation(0)
       aux2.router.navigate(['animation']);
     }
@@ -188,6 +186,7 @@ export class WorldsComponent implements OnInit {
 	}else if(this.changing){
 		this.url = `assets/video/worlds/worlds${this.current}.mp4` 
 		video.onended = function(){
+			console.log("C")
 			aux2.current = 1;
 			aux2.url = `assets/video/worlds/worlds${aux2.current}.mp4` 
 			video.currentTime = 0;
@@ -199,6 +198,7 @@ export class WorldsComponent implements OnInit {
 	  this.url = source.src
 
       video.onended = function(){
+		console.log("B")
         aux2.animalService.refresh();
 		video.currentTime = 0;
         video.play()
@@ -213,10 +213,9 @@ export class WorldsComponent implements OnInit {
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
     if(this.entering != 0 && Math.abs(time.target.currentTime - video.duration) < 0.001){
-      //this.current = 1;
       this.url = `assets/video/worlds/worlds${this.current}.mp4` 
       video.currentTime = 0;
-	    this.changing = false;
+	  this.changing = false;
       video.load();
       video.play()
     }
