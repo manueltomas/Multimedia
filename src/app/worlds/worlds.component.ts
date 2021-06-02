@@ -151,16 +151,14 @@ export class WorldsComponent implements OnInit {
 	
     if(this.rodandoDireita){
 		
-      console.log(`assets/video/worlds/worlds${this.previous()}${this.current}.mp4`)
       source.src = `assets/video/worlds/worlds${this.previous()}${this.current}.mp4`
 	  this.url = source.src
-	  
+	  this.rodandoDireita = false
+      this.animalService.refresh();
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
 		aux2.url = source.src
-        aux2.rodandoDireita = false
-        aux2.changing = false;
-        aux2.animalService.refresh();
+		aux2.changing = false;
         console.log(source.src)
         video.load()
         video.play()
@@ -171,12 +169,12 @@ export class WorldsComponent implements OnInit {
     }else if(this.rodandoEsquerda){
       source.src = `assets/video/worlds/worlds${this.next()}${this.current}.mp4`
 	  this.url = source.src
+	  this.rodandoEsquerda = false
+      this.animalService.refresh();
       video.onended = function(){
         source.src = `assets/video/worlds/worlds${aux2.current}.mp4`
 		aux2.url = source.src
-        aux2.rodandoEsquerda = false
-        aux2.changing = false;
-        aux2.animalService.refresh();
+		aux2.changing = false;
         console.log(source.src)
         video.load()
         video.play()
