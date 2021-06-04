@@ -39,6 +39,7 @@ export class WorldsComponent implements OnInit {
     }else{
       this.current =  1;
     }
+	this.changing = false;
     this.worldService.changeWorld(this.current)    
 
     //this calls the method that load the right video
@@ -55,6 +56,7 @@ export class WorldsComponent implements OnInit {
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
 	this.url = `assets/video/worlds/worlds${this.current}into.mp4`
+	this.changing = true;
 	this.entering = 0
     var aux2 = this
     video.onended = function(){
