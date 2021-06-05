@@ -24,6 +24,8 @@ export class AnimationComponent {
 
   //TODO: this variable is not being used, but it is planned to be used when the audio is added
   audio : HTMLAudioElement;
+  audio2 : HTMLAudioElement;
+  pair;
 
   changing = true;
   url;
@@ -36,6 +38,10 @@ export class AnimationComponent {
     public animalService : AnimalService){}
 
   ngOnInit(){
+    this.pair = {
+      audio : -1,
+      audio2 : -1
+    }
     //this get the position of div containg the video
     var container = document.getElementById('videoContainer');
     var offsets = container.getBoundingClientRect();
@@ -68,12 +74,14 @@ export class AnimationComponent {
               var distance = Math.abs(aux.distance(x,y,animalx,animaly));
               if(distance < 0.2){
                 aux.playAudio(i);
-                aux.audio.volume = 1 - (distance / 0.2);
-                console.log("volume setted to: " + aux.audio.volume);
-                aux.audio.play();
+                aux.mudaVolume(i, 1 - (distance / 0.2));
+                console.log("audio played");
+                //aux.audio.volume = 1 - (distance / 0.2);
+                //console.log("volume setted to: " + aux.audio.volume);
+                //aux.audio.play();
               }else{
                 console.log("audio paused");
-                aux.audio.pause();
+                aux.pausa(i);
               }
               if(distance < 0.06){
                 console.log("You are hoovering the " + aux.animalsInPage[i].name);
@@ -88,12 +96,48 @@ export class AnimationComponent {
   playAudio(animal){
     if(this.audio == undefined){
       this.audio = new Audio();
+      if(this.audio.paused){
+        this.pair.audio = animal;
+        this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].name + ".mp3";
+        this.audio.loop = true;
+        this.audio.load();
+        this.audio.play();
+      }
+    }else if(this.pair.audio == animal){
+      this.audio.play();
+    }else if(this.audio2 == undefined){
+      this.audio2 = new Audio();
+      if(this.audio2.paused){
+        this.pair.audio2 = animal;
+        this.audio2.src = "../../../assets/sounds/" + this.animalsInPage[animal].name + ".mp3";
+        this.audio2.loop = true;
+        this.audio2.load();
+        this.audio2.play();
+      }
+    }else if(this.pair.audio2 == animal){
+      this.audio2.play();
     }
     //TODO: use animal to get the respective sound
-    if(this.audio.paused){
-      this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].name + ".mp3";
-      this.audio.load();
+    
+  }
+
+  mudaVolume(animal, volume){
+    if(this.pair.audio == animal){
+      this.audio.volume = volume;
       this.audio.play();
+    }else if(this.pair.audio2 == animal){
+      this.audio2.volume = volume;
+      this.audio2.play();
+    }
+  }
+
+  pausa(animal){
+    if(this.pair.audio == animal){
+      this.audio.loop = false;
+      this.audio.pause();
+    }else if(this.pair.audio2 == animal){
+      this.audio2.loop = false;
+      this.audio2.pause();
     }
   }
 
