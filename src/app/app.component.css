@@ -1,11 +1,11 @@
 .master{
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 10% 90%;
   grid-template-rows: 10% 80% 10%;
   grid-template-areas: 
-    "header sidebar"
-    "main sidebar"
-    "footer sidebar";
+    "sidebar header"
+    "sidebar main"
+    "sidebar footer";
   width: 100%;
   height: 100%;
 }
