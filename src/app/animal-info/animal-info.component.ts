@@ -29,7 +29,8 @@ export class AnimalInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-	  this.currAnimal = this.animalInfoService.animal;
+	  //this.currAnimal = this.animalInfoService.animal;
+    this.currAnimal = {id:0, name: "cat", catched:true,description:"",imageUrl:"",page:0,world:0};
     //var fs = require('fs');
     var parser = require('subtitles-parser');
     //var srt = fs.readFile(`assets/subtitles/${name}-${this.language}.srt`, { encoding: 'utf-8' });
@@ -43,7 +44,8 @@ export class AnimalInfoComponent implements OnInit {
   }
   
   getCurrAnimalName(){
-	  this.currAnimal = this.animalInfoService.animal;
+    //this.currAnimal = this.animalInfoService.animal;
+    this.currAnimal = {id:0, name: "cat", catched:true,description:"",imageUrl:"",page:0,world:0};
 	  return this.currAnimal.name;
   }
   
