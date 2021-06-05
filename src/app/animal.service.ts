@@ -16,7 +16,7 @@ export class AnimalService {
   }
 
   getAnimals(){
-    console.log(this.animalsToShow)
+    //console.log(this.animalsToShow)
     if(this.local){
       return this.animalsToShow;
     }else{
@@ -46,6 +46,16 @@ export class AnimalService {
     return ANIMALS.filter(function(an){
       an.id == id
     })[0]
+  }
+
+  getAnimalForPage(page){
+    var result = [];
+    for(var i = 0; i < ANIMALS.length; i++){
+      if(ANIMALS[i].world == this.worldService.worldNumber && ANIMALS[i].page == page){
+        result.push(ANIMALS[i])
+      }
+    }
+    return result;
   }
 
   setCatched(id){
