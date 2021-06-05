@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AnimalService } from '../animal.service';
 import { WorldService } from '../world.service';
 import { Router } from '@angular/router';
+import { VolumeService } from '../volume.service';
 
 
 var x : number;
@@ -32,16 +33,23 @@ export class AnimationComponent {
 
   animalsInPage = [];
 
+  onTop;
+
   constructor(
 	private router : Router,
     private worldService : WorldService,
-    public animalService : AnimalService){}
+    public animalService : AnimalService,
+    private volumeService: VolumeService){}
 
   ngOnInit(){
+    if(this.worldService.getWorldById() == undefined){
+      this.router.navigate(['']);
+    }
     this.pair = {
       audio : -1,
       audio2 : -1
     }
+    this.onTop = [false, false];
     //this get the position of div containg the video
     var container = document.getElementById('videoContainer');
     var offsets = container.getBoundingClientRect();
@@ -72,22 +80,23 @@ export class AnimationComponent {
               var animalx = aux.animalsInPage[i].x;
               var animaly = aux.animalsInPage[i].y;
               var distance = Math.abs(aux.distance(x,y,animalx,animaly));
+              console.log("distance to " + aux.animalsInPage[i].name + " : " + distance);
               if(distance < 0.2){
                 aux.playAudio(i);
                 aux.mudaVolume(i, 1 - (distance / 0.2));
-                console.log("audio played");
+                //console.log("audio played");
                 //aux.audio.volume = 1 - (distance / 0.2);
                 //console.log("volume setted to: " + aux.audio.volume);
                 //aux.audio.play();
               }else{
-                console.log("audio paused");
+                //console.log("audio paused");
                 aux.pausa(i);
               }
               if(distance < 0.06){
                 console.log("You are hoovering the " + aux.animalsInPage[i].name);
-                this.onTop = true;
+                aux.onTop[i] = true;
               }else{
-                this.onTop = false;
+                aux.onTop[i] = false;
               }
             }
       };
@@ -151,17 +160,20 @@ export class AnimationComponent {
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
     var aux2 = this
-    var last = source.src;
-    source.src = `assets/video/${this.worldService.getWorldById().name}/catch1.mp4`
-	this.url = source.src
-    video.load();
-    video.play()
-    video.onended = function(){
-      aux2.animalService.setCatched(1);
-      source.src = last;
-      video.load();
-      video.play()
-      aux2.changing = false;
+    for(var i = 0; i < this.animalsInPage.length; i++){
+      if(this.onTop[i]){
+        var last = source.src;
+        this.url = `assets/video/catch${this.animalsInPage[i].id}.mp4`
+        video.load();
+        video.play()
+        video.onended = function(){
+          aux2.animalService.setCatched(1);
+          aux2.url = last;
+          video.load();
+          video.play()
+          aux2.changing = false;
+        }
+      }
     }
   }
 
@@ -322,6 +334,7 @@ export class AnimationComponent {
       this.changing = false;
       this.changeVideo();
     }
+    video.volume = this.volumeService.volume/100;
   }
   
   /*arriveNewWorldVideo(){

@@ -2,10 +2,10 @@ import { Animal } from "./Animal";
 import { WORLDS } from "./mock-worlds";
 
 export const ANIMALS: Animal[] = [
-    {id:1, name:'cat', description:'', imageUrl:'../assets/img/cat.png', catched:false, world:WORLDS[0].id, page:4, x:0.7587, y:0.4386},
-    {id:2, name:'boar', description:'', imageUrl:'../assets/img/boar.png', catched:false, world:WORLDS[0].id, page:4, x:0.1, y:0.1},
-    {id:3, name:'rabbit', description:'', imageUrl:'../assets/img/rabbit.png', catched:false, world:WORLDS[1].id, page:4, x:0.1, y:0.1},
-    {id:4, name:'squirrel', description:'', imageUrl:'../assets/img/squirrel.png', catched:false, world:WORLDS[1].id, page:4, x:0.1, y:0.1},
+    {id:1, name:'cat', description:'', imageUrl:'../assets/img/cat.png', catched:false, world:WORLDS[0].id, page:4, x:0.8715, y:0.4386},
+    {id:2, name:'boar', description:'', imageUrl:'../assets/img/boar.png', catched:false, world:WORLDS[0].id, page:4, x:0.0613, y:0.3953},
+    {id:3, name:'rabbit', description:'', imageUrl:'../assets/img/rabbit.png', catched:false, world:WORLDS[1].id, page:1, x:0.4855, y:0.3934},
+    {id:4, name:'squirrel', description:'', imageUrl:'../assets/img/squirrel.png', catched:false, world:WORLDS[1].id, page:2, x:0.5914, y:0.5759},
     {id:5, name:'fox', description:'', imageUrl:'../assets/img/fox.png', catched:false, world:WORLDS[2].id, page:4, x:0.1, y:0.1},
     {id:6, name:'dog', description:'', imageUrl:'../assets/img/dog.png', catched:false, world:WORLDS[2].id, page:4, x:0.1, y:0.1},
   ];
