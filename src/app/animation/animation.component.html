@@ -5,13 +5,13 @@
         </video>
         <span (click)="onClickVideo()"></span>
     </div>
-    <div id="botaoAnt" *ngIf="!changing">
-        <button (click)="anteriorIndice()" class="botaoAnterior"> <  </button>
+    <div id="botaoAnt"  *ngIf="!changing">
+        <button (click)="anteriorIndice()" class="arrow"></button>
     </div>
     <div id="botaoNxt" *ngIf="!changing">
-        <button (click)="proximoIndice()" class="botaoSeguinte"> > </button>
+        <button (click)="proximoIndice()" class="arrow arrows-right"></button>
     </div>
 	<div id="botaoReturnHub" *ngIf="!changing">
-		<button (click)="returnToHub()" mat-raised-button #tooltip="matTooltip" matTooltip="Go back to hub world" matTooltipHideDelay="100000" class="returnToHub"> < </button>
+		<button (click)="returnToHub()" mat-raised-button #tooltip="matTooltip" matTooltip="Go back to hub world" matTooltipHideDelay="100000"  class="back-button"></button>
 	</div>
 </div>

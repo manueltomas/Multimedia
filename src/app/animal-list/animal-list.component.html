@@ -1,6 +1,7 @@
 <div id="enclosing">
     <div id="animals">
         <div id="header">
+            <img src="\assets\icons\animals-list-icon.png">
             <div class="list-btns">
                 <div (click)="showLocalAnimals()" class="list-btn selected">
                     <a>Local</a>
@@ -9,7 +10,6 @@
                     <a>Global</a>
                 </div>
             </div>
-            <img src="\assets\icons\animals-list-icon.png">
         </div>
         <div id="main">
             <div class="animal" *ngFor="let a of animalService.getAnimals()">
