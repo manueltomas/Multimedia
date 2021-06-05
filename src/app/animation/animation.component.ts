@@ -170,7 +170,6 @@ export class AnimationComponent {
    * This method is called when the user clicks on the video
    */
   onClickVideo(){
-    this.changing = true;
     var sourceAux : any = document.getElementById("source")
     var source : HTMLSourceElement = sourceAux
     var videoAux : any = document.getElementById("video")
@@ -180,6 +179,7 @@ export class AnimationComponent {
     for(var i = 0; i < this.animalsInPage.length; i++){
       console.log(this.animalsInPage[i])
       if(this.animalsInPage[i].onTop){
+        this.changing = true;
         var animal = aux2.animalsInPage[i].animal;
         var last = source.src;
         this.url = `assets/video/catch${animal.id}.mp4`
