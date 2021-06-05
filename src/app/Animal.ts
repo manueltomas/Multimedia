@@ -8,4 +8,6 @@ export interface Animal{
     catched:Boolean;
     world:number;
     page:number;
+    x:number;
+    y:number;
 }
