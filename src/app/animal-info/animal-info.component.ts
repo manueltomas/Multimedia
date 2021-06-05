@@ -7,6 +7,7 @@ import {Location} from '@angular/common';
 import { Animal } from '../Animal';
 import { HttpClient } from '@angular/common/http';
 import { ANIMALS } from '../mock-animals';
+import { WorldService } from '../world.service';
 
 declare var require:any
 
@@ -24,14 +25,19 @@ export class AnimalInfoComponent implements OnInit {
   fileContent;
   
   constructor(
+    private worldService : WorldService,
+  private router : Router,
 	private _location: Location,
 	private animalInfoService: AnimalInfoService,
   private http: HttpClient
   ) { }
 
   ngOnInit(): void {
+    if(this.animalInfoService.animal == undefined){
+      this.router.navigate(['']);
+    }
 	  //this.currAnimal = this.animalInfoService.animal;
-    this.currAnimal = ANIMALS[0];
+    this.currAnimal = ANIMALS[this.animalInfoService.animal.id - 1];
     //var fs = require('fs');
     var parser = require('subtitles-parser');
     //var srt = fs.readFile(`assets/subtitles/${name}-${this.language}.srt`, { encoding: 'utf-8' });
@@ -46,7 +52,6 @@ export class AnimalInfoComponent implements OnInit {
   
   getCurrAnimalName(){
     //this.currAnimal = this.animalInfoService.animal;
-    this.currAnimal = ANIMALS[0];
 	  return this.currAnimal.name;
   }
   
@@ -60,6 +65,10 @@ export class AnimalInfoComponent implements OnInit {
 
   timeUpdate(time){
     console.log(time.target.currentTime)
+    if(this.language === "Off"){
+      this.subtitles = "";
+      return;
+    }
     for(var i = 0; i < this.data.length; i++){
       console.log(this.stringToSeconds(this.data[i].startTime) < time.target.currentTime && this.stringToSeconds(this.data[i].endTime) > time.target.currentTime)
       if(this.stringToSeconds(this.data[i].startTime) < time.target.currentTime && this.stringToSeconds(this.data[i].endTime) > time.target.currentTime){
@@ -79,11 +88,13 @@ export class AnimalInfoComponent implements OnInit {
   }
 
   changedLang(){
-    var parser = require('subtitles-parser');
-    var source = this;
-    this.http.get(`assets/subtitles/${this.currAnimal.name}-${this.language}.srt`, {responseType: 'text'})
-        .subscribe(data => {
-          source.data = parser.fromSrt(data);
-        });
+    if(this.language !== "Off"){
+      var parser = require('subtitles-parser');
+      var source = this;
+      this.http.get(`assets/subtitles/${this.currAnimal.name}-${this.language}.srt`, {responseType: 'text'})
+          .subscribe(data => {
+            source.data = parser.fromSrt(data);
+          });
+    }
   }
 }

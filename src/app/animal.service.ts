@@ -52,7 +52,7 @@ export class AnimalService {
     var result = [];
     for(var i = 0; i < ANIMALS.length; i++){
       if(ANIMALS[i].world == this.worldService.worldNumber && ANIMALS[i].page == page){
-        result.push(ANIMALS[i])
+        result.push({animal : ANIMALS[i], onTop : false})
       }
     }
     return result;

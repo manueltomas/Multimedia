@@ -57,7 +57,11 @@ export class AnimationComponent {
     var left = offsets.left;
 	
     //this is used to restore the world being shown when the user returns from another page
+    //this.changing = false;
     this.current = this.worldService.animationNumber;
+    if(this.current != 1){
+      this.changing = false;
+    }
     this.animalsInPage = this.animalService.getAnimalForPage(this.current);
 	console.log(this.current)
     /*if(this.current === 0){
@@ -75,12 +79,14 @@ export class AnimationComponent {
             x /= container.clientWidth;
             y /= container.clientHeight;
             console.log("Mouse in position (" + x + "," + y + ")");
-            
+            if(aux.changing){
+              aux.resetAudio();
+            }
             for(var i = 0; i < aux.animalsInPage.length; i++){
-              var animalx = aux.animalsInPage[i].x;
-              var animaly = aux.animalsInPage[i].y;
+              var animalx = aux.animalsInPage[i].animal.x;
+              var animaly = aux.animalsInPage[i].animal.y;
               var distance = Math.abs(aux.distance(x,y,animalx,animaly));
-              console.log("distance to " + aux.animalsInPage[i].name + " : " + distance);
+              console.log("distance to " + aux.animalsInPage[i].animal.name + " : " + distance);
               if(distance < 0.2){
                 aux.playAudio(i);
                 aux.mudaVolume(i, 1 - (distance / 0.2));
@@ -93,13 +99,23 @@ export class AnimationComponent {
                 aux.pausa(i);
               }
               if(distance < 0.06){
-                console.log("You are hoovering the " + aux.animalsInPage[i].name);
-                aux.onTop[i] = true;
+                console.log("You are hoovering the " + aux.animalsInPage[i].animal.name);
+                aux.animalsInPage[i].onTop = true;
               }else{
-                aux.onTop[i] = false;
+                aux.animalsInPage[i].onTop = false;
               }
+              console.log(aux.animalsInPage);
             }
       };
+  }
+
+  resetAudio(){
+    if(this.audio != undefined){
+      this.audio.pause();
+    }
+    if(this.audio2 != undefined){
+      this.audio2.pause();
+    }
   }
 
   playAudio(animal){
@@ -107,7 +123,7 @@ export class AnimationComponent {
       this.audio = new Audio();
       if(this.audio.paused){
         this.pair.audio = animal;
-        this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].name + ".mp3";
+        this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
         this.audio.loop = true;
         this.audio.load();
         this.audio.play();
@@ -118,7 +134,7 @@ export class AnimationComponent {
       this.audio2 = new Audio();
       if(this.audio2.paused){
         this.pair.audio2 = animal;
-        this.audio2.src = "../../../assets/sounds/" + this.animalsInPage[animal].name + ".mp3";
+        this.audio2.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
         this.audio2.loop = true;
         this.audio2.load();
         this.audio2.play();
@@ -160,14 +176,17 @@ export class AnimationComponent {
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
     var aux2 = this
+    console.log(this.animalsInPage)
     for(var i = 0; i < this.animalsInPage.length; i++){
-      if(this.onTop[i]){
+      console.log(this.animalsInPage[i])
+      if(this.animalsInPage[i].onTop){
+        var animal = aux2.animalsInPage[i].animal;
         var last = source.src;
-        this.url = `assets/video/catch${this.animalsInPage[i].id}.mp4`
+        this.url = `assets/video/catch${animal.id}.mp4`
         video.load();
         video.play()
         video.onended = function(){
-          aux2.animalService.setCatched(1);
+          aux2.animalService.setCatched(animal.id);
           aux2.url = last;
           video.load();
           video.play()
@@ -185,7 +204,7 @@ export class AnimationComponent {
    */
   anteriorIndice(){
     this.current = this.previous()
-    this.animalsInPage = this.animalService.getAnimalForPage(this.current);
+    this.worldService.changeAnimation(this.current)
     this.worldService.changeAnimation(this.current);
     this.rodandoEsquerda = true;
     this.changing = true;
@@ -213,6 +232,7 @@ export class AnimationComponent {
   proximoIndice(){
     this.current = ((this.current+1) % 5)
     this.animalsInPage = this.animalService.getAnimalForPage(this.current);
+    this.worldService.changeAnimation(this.current)
     if(this.current == 0){
       this.current++;
     }
@@ -275,6 +295,7 @@ export class AnimationComponent {
           video.currentTime = 0;
           video.play();
         }
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
         aux2.changing = false;
       }
       video.load()
@@ -294,6 +315,7 @@ export class AnimationComponent {
           video.currentTime = 0;
           video.play();
         }
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
         aux2.changing = false;
       }
       video.load()
