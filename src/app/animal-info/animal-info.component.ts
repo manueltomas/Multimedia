@@ -51,7 +51,7 @@ export class AnimalInfoComponent implements OnInit {
   }
   
   getCurrAnimalName(){
-    //this.currAnimal = this.animalInfoService.animal;
+	  this.currAnimal = this.animalInfoService.animal;
 	  return this.currAnimal.name;
   }
   
