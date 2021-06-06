@@ -81,6 +81,7 @@ export class AnimationComponent {
             console.log("Mouse in position (" + x + "," + y + ")");
             if(aux.changing){
               aux.resetAudio();
+			  return;
             }
             for(var i = 0; i < aux.animalsInPage.length; i++){
               var animalx = aux.animalsInPage[i].animal.x;
@@ -119,8 +120,11 @@ export class AnimationComponent {
   }
 
   playAudio(animal){
-    if(this.audio == undefined){
-      this.audio = new Audio();
+    if(this.audio == undefined || this.pair.audio == -1){
+	  console.log("A")
+	  if (this.audio == undefined){
+		this.audio = new Audio();
+	  }
       if(this.audio.paused){
         this.pair.audio = animal;
         this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
@@ -129,9 +133,14 @@ export class AnimationComponent {
         this.audio.play();
       }
     }else if(this.pair.audio == animal){
+	  console.log("B")
       this.audio.play();
-    }else if(this.audio2 == undefined){
-      this.audio2 = new Audio();
+    }else if(this.audio2 == undefined || this.pair.audio2 == -1){
+		console.log("C")
+	  if (this.audio2 == undefined){
+		this.audio2 = new Audio();
+	  }
+      //this.audio2 = new Audio();
       if(this.audio2.paused){
         this.pair.audio2 = animal;
         this.audio2.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
@@ -140,6 +149,7 @@ export class AnimationComponent {
         this.audio2.play();
       }
     }else if(this.pair.audio2 == animal){
+		console.log("D")
       this.audio2.play();
     }
     //TODO: use animal to get the respective sound
@@ -209,6 +219,12 @@ export class AnimationComponent {
     this.rodandoEsquerda = true;
     this.changing = true;
     this.changeVideo()
+	for(var i = 0; i < this.animalsInPage.length; i++){
+		this.animalsInPage[i].onTop = false;
+	}
+	this.pair.audio = -1
+	this.pair.audio2 = -1
+	this.resetAudio()
   }
   
   /**
@@ -240,6 +256,12 @@ export class AnimationComponent {
     this.rodandoDireita = true;
     this.changing = true;
     this.changeVideo()
+	for(var i = 0; i < this.animalsInPage.length; i++){
+		this.animalsInPage[i].onTop = false;
+	}
+	this.pair.audio = -1
+	this.pair.audio2 = -1
+	this.resetAudio()
   }
   
   /**
