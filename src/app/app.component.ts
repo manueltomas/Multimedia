@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SharedService } from './services/shared-service.service';
+import { WorldService } from './world.service';
 
 var x : number;
 var y : number;
@@ -14,20 +15,39 @@ export class AppComponent {
   title = 'Multimedia';
   audio;
   onTop;
-  showAnimalList = true; 
+  showAnimalList = true;
+  animalListPos = "left";
   mainContainerStyle = "master"
   constructor( 
-      private _sharedService: SharedService
+      private _sharedService: SharedService,
+      private worldServise: WorldService 
     ){
       this._sharedService.changeEmitted$.subscribe(
         value => {
           this.mainContainerStyle = value? "master" : "master-full";
           this.showAnimalList = value;
-          document.getElementById('container').className = this.mainContainerStyle
+          document.getElementById('container').classList.remove("master");
+          document.getElementById('container').classList.remove("master-full");
+          document.getElementById('container').classList.add(this.mainContainerStyle);
         });
+
     }
 
   ngOnInit(){
+
+    this.worldServise.animalListPosition$.subscribe(
+      toogle => {
+        console.log("sadasdasdasdsad");
+        var container = document.getElementById('container');
+        if(toogle == "right"){
+          container.classList.add("right");
+          this.animalListPos = "right";
+        }else{
+          container.classList.remove("right");
+          this.animalListPos = "left";
+        }
+    })
+
     var offsets = document.getElementById('imageContainer').getBoundingClientRect();
     var top = offsets.top;
     var left = offsets.left;

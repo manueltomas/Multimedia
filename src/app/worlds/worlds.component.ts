@@ -33,7 +33,6 @@ export class WorldsComponent implements OnInit {
   public volumeService : VolumeService) { }
 
   ngOnInit(): void {
-
     //this is used to restore the world being shown when the user returns from another page
     this.current = this.worldService.worldNumber;
     if(this.current !== 0){
@@ -210,8 +209,8 @@ export class WorldsComponent implements OnInit {
   }
   
   timeUpdate(time){
-    console.log(time.target.currentTime)
-    console.log("entering: " + this.entering)
+    //console.log(time.target.currentTime)
+    //console.log("entering: " + this.entering)
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
     if(this.entering != 0 && Math.abs(time.target.currentTime - video.duration) < 0.001){

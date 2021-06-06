@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
 import { AnimalInfoService } from '../animal-info.service';
@@ -11,6 +11,7 @@ import { VolumeService } from '../volume.service';
 })
 export class AnimalListComponent implements OnInit {
 
+  @Input() animalListPos;
 
   constructor(
 	  private router : Router,
@@ -22,6 +23,10 @@ export class AnimalListComponent implements OnInit {
   ngOnInit() {
     //this calls the showWorld method
     this.animalService.showWorld();
+
+    if(this.animalListPos === "right"){
+      this.mirrorListRight();
+    }
   }
 
   /**
@@ -63,5 +68,20 @@ export class AnimalListComponent implements OnInit {
 		this.animalInfoService.changeAnimal(a);
 		this.router.navigate(['info']);
 	}
+  }
+
+
+  mirrorListRight(){
+    var container = document.getElementById('animals');
+    var header = document.getElementById('header');
+    var main = document.getElementById('main');
+    var footer = document.getElementById('footer');
+    var bar = document.getElementById('bar');
+
+    container.classList.add("right");
+    header.classList.add("right");
+    main.classList.add("right");
+    footer.classList.add("right");
+    bar.classList.add("right");
   }
 }

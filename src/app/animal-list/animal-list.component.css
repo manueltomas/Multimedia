@@ -4,7 +4,7 @@
     background-color: #B2905B;
 }
 
-#animals{
+.animals{
     display: grid;
     height: 100%;
     grid-template-columns: 2% 49% 49%;
@@ -15,19 +15,32 @@
         "bar footer footer";
 }
 
-#header{
+.animals.right{
+    grid-template-columns: 49% 49% 2%;
+    grid-template-areas: 
+        "header header header"
+        "animals animals bar"
+        "footer footer bar";
+}
+
+.header{
     padding-right: 0.6em;
     padding-left: 0.1em;
     background-color: #D6BA8F;
     grid-area: header;
     border: 2px solid black;
-    border-radius: 0px 15px 0px 0px;
+    border-radius: 0px 5px 0px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#main{
+.header.right{
+    border-radius: 5px 0px 0px 0px;
+    flex-direction: row-reverse;
+}
+
+.main{
     direction: rtl;
     overflow-y: auto;
     overflow-x: hidden;
@@ -49,18 +62,32 @@
     align-content: start;
 }
 
-#footer{
+.main.right{
+    direction: ltr;
+}
+
+.footer{
     background-color: #D6BA8F;
     grid-area: footer;
     border: 2px solid black;
-    border-radius: 0px 0px 15px 0px;
+    border-radius: 0px 0px 5px 0px;
 }
 
-#bar{
+.footer{
+    border-radius: 0px 0px 0px 5px;
+}
+
+.bar{
     background-color: #9F9F9F;
     grid-area: bar;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
+    border-right: 0px solid black;
+}
+
+.bar.right{
+    border-left: 0px solid black;
+    border-right: 2px solid black;
 }
 
 .animal {

@@ -1,6 +1,6 @@
 <div id="enclosing">
-    <div id="animals">
-        <div id="header">
+    <div id="animals" class="animals">
+        <div id="header" class="header">
             <img src="\assets\icons\animals-list-icon.png">
             <div class="list-btns">
                 <div (click)="showLocalAnimals()" class="list-btn selected">
@@ -11,14 +11,14 @@
                 </div>
             </div>
         </div>
-        <div id="main">
+        <div id="main" class="main">
             <div class="animal" *ngFor="let a of animalService.getAnimals()">
                 <img *ngIf="a.catched" id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
                 <img *ngIf="!a.catched" id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
             </div>
         </div>
-        <div id="bar"></div>
-        <div id="footer">
+        <div id="bar" class="bar"></div>
+        <div id="footer" class="footer">
             <input type="range" min="0" max="100" value="100" [(ngModel)]="volumeService.volume">
             {{volumeService.volume}}
         </div>

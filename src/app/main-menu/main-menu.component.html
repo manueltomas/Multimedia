@@ -1,4 +1,10 @@
 <div id="container">
 	<h1 class="main-title">Sound Hunt</h1>
-	<button (click)="start()" class="btn">START</button>
+	<div class="buttons">
+		<button (click)="start()" class="btn">START</button>
+		<button (click)="openSettings()" class="btn settings">SETTINGS</button>
+	</div>
+	<app-popup id="modal-settings">
+		<app-settings-model-popup id="modal-settings"></app-settings-model-popup>
+	</app-popup>
 </div>
