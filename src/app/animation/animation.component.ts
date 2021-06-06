@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AnimalService } from '../animal.service';
 import { WorldService } from '../world.service';
 import { Router } from '@angular/router';
+import { VolumeService } from '../volume.service';
 
 
 var x : number;
@@ -24,18 +25,31 @@ export class AnimationComponent {
 
   //TODO: this variable is not being used, but it is planned to be used when the audio is added
   audio : HTMLAudioElement;
+  audio2 : HTMLAudioElement;
+  pair;
 
   changing = true;
   url;
 
   animalsInPage = [];
 
+  onTop;
+
   constructor(
 	private router : Router,
     private worldService : WorldService,
-    public animalService : AnimalService){}
+    public animalService : AnimalService,
+    private volumeService: VolumeService){}
 
   ngOnInit(){
+    if(this.worldService.getWorldById() == undefined){
+      this.router.navigate(['']);
+    }
+    this.pair = {
+      audio : -1,
+      audio2 : -1
+    }
+    this.onTop = [false, false];
     //this get the position of div containg the video
     var container = document.getElementById('videoContainer');
     var offsets = container.getBoundingClientRect();
@@ -43,9 +57,13 @@ export class AnimationComponent {
     var left = offsets.left;
 	
     //this is used to restore the world being shown when the user returns from another page
+    //this.changing = false;
     this.current = this.worldService.animationNumber;
-    this.animalsInPage = this.animalService.getAnimalForPage(this.current);
-	console.log(this.current)
+    if(this.current != 1){
+      this.changing = false;
+    }
+    console.log(this.current)
+	console.log(this.animalsInPage)
     /*if(this.current === 0){
 		this.arriveNewWorldVideo()
     }*/
@@ -61,39 +79,90 @@ export class AnimationComponent {
             x /= container.clientWidth;
             y /= container.clientHeight;
             console.log("Mouse in position (" + x + "," + y + ")");
-            
+            if(aux.changing){
+              aux.resetAudio();
+            }
             for(var i = 0; i < aux.animalsInPage.length; i++){
-              var animalx = aux.animalsInPage[i].x;
-              var animaly = aux.animalsInPage[i].y;
+              var animalx = aux.animalsInPage[i].animal.x;
+              var animaly = aux.animalsInPage[i].animal.y;
               var distance = Math.abs(aux.distance(x,y,animalx,animaly));
+              console.log("distance to " + aux.animalsInPage[i].animal.name + " : " + distance);
               if(distance < 0.2){
                 aux.playAudio(i);
-                aux.audio.volume = 1 - (distance / 0.2);
-                console.log("volume setted to: " + aux.audio.volume);
-                aux.audio.play();
+                aux.mudaVolume(i, 1 - (distance / 0.2));
+                //console.log("audio played");
+                //aux.audio.volume = 1 - (distance / 0.2);
+                //console.log("volume setted to: " + aux.audio.volume);
+                //aux.audio.play();
               }else{
-                console.log("audio paused");
-                aux.audio.pause();
+                //console.log("audio paused");
+                aux.pausa(i);
               }
               if(distance < 0.06){
-                console.log("You are hoovering the " + aux.animalsInPage[i].name);
-                this.onTop = true;
+                console.log("You are hoovering the " + aux.animalsInPage[i].animal.name);
+                aux.animalsInPage[i].onTop = true;
               }else{
-                this.onTop = false;
+                aux.animalsInPage[i].onTop = false;
               }
+              console.log(aux.animalsInPage);
             }
       };
+  }
+
+  resetAudio(){
+    if(this.audio != undefined){
+      this.audio.pause();
+    }
+    if(this.audio2 != undefined){
+      this.audio2.pause();
+    }
   }
 
   playAudio(animal){
     if(this.audio == undefined){
       this.audio = new Audio();
+      if(this.audio.paused){
+        this.pair.audio = animal;
+        this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
+        this.audio.loop = true;
+        this.audio.load();
+        this.audio.play();
+      }
+    }else if(this.pair.audio == animal){
+      this.audio.play();
+    }else if(this.audio2 == undefined){
+      this.audio2 = new Audio();
+      if(this.audio2.paused){
+        this.pair.audio2 = animal;
+        this.audio2.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
+        this.audio2.loop = true;
+        this.audio2.load();
+        this.audio2.play();
+      }
+    }else if(this.pair.audio2 == animal){
+      this.audio2.play();
     }
     //TODO: use animal to get the respective sound
-    if(this.audio.paused){
-      this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].name + ".mp3";
-      this.audio.load();
+    
+  }
+
+  mudaVolume(animal, volume){
+    if(this.pair.audio == animal){
+      this.audio.volume = volume;
       this.audio.play();
+    }else if(this.pair.audio2 == animal){
+      this.audio2.volume = volume;
+      this.audio2.play();
+    }
+  }
+
+  pausa(animal){
+    if(this.pair.audio == animal){
+      this.audio.loop = false;
+      this.audio.pause();
+    }else if(this.pair.audio2 == animal){
+      this.audio2.loop = false;
+      this.audio2.pause();
     }
   }
 
@@ -101,23 +170,29 @@ export class AnimationComponent {
    * This method is called when the user clicks on the video
    */
   onClickVideo(){
-    this.changing = true;
     var sourceAux : any = document.getElementById("source")
     var source : HTMLSourceElement = sourceAux
     var videoAux : any = document.getElementById("video")
     var video : HTMLVideoElement = videoAux;
     var aux2 = this
-    var last = source.src;
-    source.src = `assets/video/${this.worldService.getWorldById().name}/catch1.mp4`
-	this.url = source.src
-    video.load();
-    video.play()
-    video.onended = function(){
-      aux2.animalService.setCatched(1);
-      source.src = last;
-      video.load();
-      video.play()
-      aux2.changing = false;
+    console.log(this.animalsInPage)
+    for(var i = 0; i < this.animalsInPage.length; i++){
+      console.log(this.animalsInPage[i])
+      if(this.animalsInPage[i].onTop){
+        this.changing = true;
+        var animal = aux2.animalsInPage[i].animal;
+        var last = source.src;
+        this.url = `assets/video/catch${animal.id}.mp4`
+        video.load();
+        video.play()
+        video.onended = function(){
+          aux2.animalService.setCatched(animal.id);
+          aux2.url = last;
+          video.load();
+          video.play()
+          aux2.changing = false;
+        }
+      }
     }
   }
 
@@ -129,7 +204,7 @@ export class AnimationComponent {
    */
   anteriorIndice(){
     this.current = this.previous()
-    this.animalsInPage = this.animalService.getAnimalForPage(this.current);
+    this.worldService.changeAnimation(this.current)
     this.worldService.changeAnimation(this.current);
     this.rodandoEsquerda = true;
     this.changing = true;
@@ -156,7 +231,8 @@ export class AnimationComponent {
    */
   proximoIndice(){
     this.current = ((this.current+1) % 5)
-    this.animalsInPage = this.animalService.getAnimalForPage(this.current);
+    //this.animalsInPage = this.animalService.getAnimalForPage(this.current);
+    this.worldService.changeAnimation(this.current)
     if(this.current == 0){
       this.current++;
     }
@@ -219,6 +295,7 @@ export class AnimationComponent {
           video.currentTime = 0;
           video.play();
         }
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
         aux2.changing = false;
       }
       video.load()
@@ -238,6 +315,7 @@ export class AnimationComponent {
           video.currentTime = 0;
           video.play();
         }
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
         aux2.changing = false;
       }
       video.load()
@@ -252,6 +330,7 @@ export class AnimationComponent {
 		    video.currentTime = 0;
         video.load();
         video.play()
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
       }
       console.log(video.onended)
     }else{
@@ -261,6 +340,7 @@ export class AnimationComponent {
 		    video.currentTime = 0;
         video.load();
         video.play()
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
       }
       video.play();
     }
@@ -278,27 +358,8 @@ export class AnimationComponent {
       this.changing = false;
       this.changeVideo();
     }
+    video.volume = this.volumeService.volume/100;
   }
-  
-  /*arriveNewWorldVideo(){
-    var videoAux : any = document.getElementById("video")
-    var video : HTMLVideoElement = videoAux;
-    var aux = this
-    video.onloadstart = function(){
-      console.log("im here")
-      video.onended = function(){
-        console.log("im here")
-        aux.changing = false;
-        aux.current =  1;
-        aux.worldService.changeAnimation(aux.current)
-        aux.changeVideo()
-      }	
-    }
-    this.url = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
-    console.log(this.url)
-    
-    
-  }*/
 
   distance(x1, y1, x2, y2){
     return Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));

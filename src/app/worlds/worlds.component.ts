@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
+import { VolumeService } from '../volume.service';
 import { WorldService } from '../world.service';
 
 
@@ -28,7 +29,8 @@ export class WorldsComponent implements OnInit {
   constructor(
 	private router : Router,
 	private worldService : WorldService,
-	private animalService : AnimalService) { }
+	private animalService : AnimalService,
+  public volumeService : VolumeService) { }
 
   ngOnInit(): void {
     //this is used to restore the world being shown when the user returns from another page
@@ -218,6 +220,7 @@ export class WorldsComponent implements OnInit {
       video.load();
       video.play()
     }
+    video.volume = this.volumeService.volume/100;
   }
   
   /**

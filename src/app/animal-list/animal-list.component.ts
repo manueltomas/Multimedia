@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
 import { AnimalInfoService } from '../animal-info.service';
+import { VolumeService } from '../volume.service';
 
 @Component({
   selector: 'app-animal-list',
@@ -15,7 +16,8 @@ export class AnimalListComponent implements OnInit {
   constructor(
 	  private router : Router,
     public animalService : AnimalService,
-	  private animalInfoService: AnimalInfoService
+	  private animalInfoService: AnimalInfoService,
+    public volumeService: VolumeService
   ) { }
 
   ngOnInit() {
