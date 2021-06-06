@@ -26,7 +26,17 @@
     grid-area: title;
 }
 
-button{
-    margin-right: 3vw;
+.buttons{
     grid-area: buttons;
+}
+
+button{
+    padding: 0.5em 3em;
+    margin-top: 0.7em;
+    margin-bottom: 0px;
+    margin-right: 3vw;
+}
+
+.settings{
+    padding: 0.5em 2.15em;
 }

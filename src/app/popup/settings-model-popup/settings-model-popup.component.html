@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="title">
+        <h3>Settings</h3>
+    </div>
+    <div class="options">
+        <ul>
+            <li class="option">
+                <p class="setting-text">Set animal list window on the right</p>
+                <label class="switch setting-text-button">
+                    <input (click)="toogleAnimalListPosition()" class="toogleAnimalListPosition" type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <button (click)="closePopup()" class="btn">Close</button>
+    </footer>
+</div>

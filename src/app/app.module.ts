@@ -12,6 +12,8 @@ import { AnimalInfoComponent } from './animal-info/animal-info.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PopupComponent } from './popup/popup/popup.component';
+import { SettingsModelPopupComponent } from './popup/settings-model-popup/settings-model-popup.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     AnimalListComponent,
 	WorldsComponent,
 	AnimalInfoComponent,
- MainMenuComponent
+ MainMenuComponent,
+ PopupComponent,
+ SettingsModelPopupComponent
   ],
   imports: [
   	MatTooltipModule,

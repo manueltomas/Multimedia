@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AnimalService } from '../animal.service';
 import { SharedService } from '../services/shared-service.service';
 import { WorldService } from '../world.service';
-
+import { PopupService } from '../popup/popup/popup.service';
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
@@ -15,7 +15,8 @@ export class MainMenuComponent implements OnInit {
 	private worldService : WorldService,
 	private animalService : AnimalService,
 	private router : Router,
-  private _sharedService: SharedService ){
+  private _sharedService: SharedService,
+  private  popupServices: PopupService){
     this._sharedService.showAnimalList(false);
   }
 
@@ -27,5 +28,10 @@ export class MainMenuComponent implements OnInit {
   start(){
     this.router.navigate(['worlds'])
     this._sharedService.showAnimalList(true);
+  }
+
+  openSettings(){
+    this.popupServices.open('modal-settings');
+    this.worldService.animalListPosition = "left";
   }
 }
