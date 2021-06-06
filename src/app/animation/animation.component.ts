@@ -62,8 +62,8 @@ export class AnimationComponent {
     if(this.current != 1){
       this.changing = false;
     }
-    this.animalsInPage = this.animalService.getAnimalForPage(this.current);
-	console.log(this.current)
+    console.log(this.current)
+	console.log(this.animalsInPage)
     /*if(this.current === 0){
 		this.arriveNewWorldVideo()
     }*/
@@ -231,7 +231,7 @@ export class AnimationComponent {
    */
   proximoIndice(){
     this.current = ((this.current+1) % 5)
-    this.animalsInPage = this.animalService.getAnimalForPage(this.current);
+    //this.animalsInPage = this.animalService.getAnimalForPage(this.current);
     this.worldService.changeAnimation(this.current)
     if(this.current == 0){
       this.current++;
@@ -330,6 +330,7 @@ export class AnimationComponent {
 		    video.currentTime = 0;
         video.load();
         video.play()
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
       }
       console.log(video.onended)
     }else{
@@ -339,6 +340,7 @@ export class AnimationComponent {
 		    video.currentTime = 0;
         video.load();
         video.play()
+        aux2.animalsInPage = aux2.animalService.getAnimalForPage(aux2.current);
       }
       video.play();
     }
@@ -358,26 +360,6 @@ export class AnimationComponent {
     }
     video.volume = this.volumeService.volume/100;
   }
-  
-  /*arriveNewWorldVideo(){
-    var videoAux : any = document.getElementById("video")
-    var video : HTMLVideoElement = videoAux;
-    var aux = this
-    video.onloadstart = function(){
-      console.log("im here")
-      video.onended = function(){
-        console.log("im here")
-        aux.changing = false;
-        aux.current =  1;
-        aux.worldService.changeAnimation(aux.current)
-        aux.changeVideo()
-      }	
-    }
-    this.url = `assets/video/${this.worldService.getWorldById().name}/${this.current}.mp4`
-    console.log(this.url)
-    
-    
-  }*/
 
   distance(x1, y1, x2, y2){
     return Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));
