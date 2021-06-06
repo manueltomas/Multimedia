@@ -10,8 +10,7 @@
             </select>
         </div>
         <div>
-            <video id="animalVideo" controls (timeupdate)="timeUpdate($event)">
-                <source src="{{getVideoUrl()}}" type="video/mp4">
+            <video id="animalVideo" src="{{getVideoUrl()}}" controls (timeupdate)="timeUpdate($event)" type="video/mp4">
             </video>
         </div>
         <div class="subtitles">
