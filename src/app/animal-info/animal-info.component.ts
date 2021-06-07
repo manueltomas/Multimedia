@@ -51,7 +51,7 @@ export class AnimalInfoComponent implements OnInit {
   }
   
   getCurrAnimalName(){
-	  this.currAnimal = this.animalInfoService.animal;
+      this.currAnimal = this.animalInfoService.animal;
 	  return this.currAnimal.name;
   }
   
@@ -69,6 +69,12 @@ export class AnimalInfoComponent implements OnInit {
       this.subtitles = "";
       return;
     }
+	var parser = require('subtitles-parser');
+	var source = this;
+	this.http.get(`assets/subtitles/${this.currAnimal.name}-${this.language}.srt`, {responseType: 'text'})
+        .subscribe(data => {
+        source.data = parser.fromSrt(data);
+    });
     for(var i = 0; i < this.data.length; i++){
       console.log(this.stringToSeconds(this.data[i].startTime) < time.target.currentTime && this.stringToSeconds(this.data[i].endTime) > time.target.currentTime)
       if(this.stringToSeconds(this.data[i].startTime) < time.target.currentTime && this.stringToSeconds(this.data[i].endTime) > time.target.currentTime){
