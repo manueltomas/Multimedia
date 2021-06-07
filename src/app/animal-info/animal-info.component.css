@@ -35,3 +35,26 @@
     grid-area: video;
     width: 90% !important;
 }
+
+.link-count{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    width: 33%;
+    height: 43%;
+    z-index: 10;
+}
+
+.link{
+    position: relative;
+    left: -37.5%;
+    top: -33%;
+    width: 100%;
+    height: 100%;
+    /* margin-left: 50%;
+    margin-top: 50%; */
+    border: 3px solid #73AD21;
+    text-align: center;
+    z-index: 11;
+}

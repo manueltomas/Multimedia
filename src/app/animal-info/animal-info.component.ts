@@ -23,6 +23,7 @@ export class AnimalInfoComponent implements OnInit {
   language = "Portuguese";
   subtitles;
   fileContent;
+  end;
   
   constructor(
     private worldService : WorldService,
@@ -65,6 +66,13 @@ export class AnimalInfoComponent implements OnInit {
 
   timeUpdate(time){
     console.log(time.target.currentTime)
+    var videoAux : any = document.getElementById("animalVideo");
+    var video : HTMLVideoElement = videoAux;
+    if(video.duration - time.target.currentTime < 6){
+      this.end = true;
+    }else{
+      this.end = false;
+    }
     if(this.language === "Off"){
       this.subtitles = "";
       return;
@@ -102,5 +110,10 @@ export class AnimalInfoComponent implements OnInit {
             source.data = parser.fromSrt(data);
           });
     }
+  }
+
+  getAnimalInfoLink(){
+    //this.router.navigateByUrl(this.currAnimal.link);
+    window.open(this.currAnimal.link, "_blank");
   }
 }

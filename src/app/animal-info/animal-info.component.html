@@ -10,6 +10,11 @@
             </select>
         </div>
         <div>
+            <div class="link-count" *ngIf="end">
+                <div class="link" (click)="getAnimalInfoLink()">
+
+                </div>
+            </div>
             <video id="animalVideo" src="{{getVideoUrl()}}" controls (timeupdate)="timeUpdate($event)" type="video/mp4">
             </video>
         </div>
