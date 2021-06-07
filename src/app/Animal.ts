@@ -10,4 +10,5 @@ export interface Animal{
     page:number;
     x:number;
     y:number;
+    link:string;
 }

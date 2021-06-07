@@ -1,0 +1,63 @@
+﻿1
+00:00:00,000 --> 00:00:02,500
+You have found a dog! 
+
+2
+00:00:02,700 --> 00:00:09,700
+The dog, known as Canis familiaris, is a very common species around residential areas. 
+
+3
+00:00:09,899 --> 00:00:13,890
+The reason for this is that they are a domestic species,
+
+4
+00:00:14,040 --> 00:00:19,900
+that is, a species of animal where humans have exerted immense influence over their livelihood
+
+5
+00:00:20,100 --> 00:00:25,060
+and care over multiple generations, such that the species develops
+
+6
+00:00:25,260 --> 00:00:31,730
+enabling traits that make them rely more on humans and enhance their social characteristics.
+
+7
+00:00:31,930 --> 00:00:37,340
+Dogs were first domesticated in Europe, the area around modern-day Germany, 
+
+8
+00:00:37,540 --> 00:00:42,110
+with the process starting at least 14000 years ago. 
+
+9
+00:00:42,310 --> 00:00:49,080
+However, disputed sources point to other, older possibilities, such as Eurasia.
+
+10
+00:00:49,280 --> 00:00:55,970
+Whatever the case, the dog is recognised as the first animal species to be domesticated.
+
+11
+00:00:56,170 --> 00:01:02,960
+This long association with humans is due to the symbiotic relationship between the two species.
+
+12
+00:01:03,160 --> 00:01:08,270
+The nearest living relative of the modern day dog are the species of grey wolf.
+
+13
+00:01:08,470 --> 00:01:16,670
+They are valued for their plethora of roles, from simple companionship to hunting, herding and other tasks assisting humans.
+
+14
+00:01:16,870 --> 00:01:24,730
+As of 2013 there are an estimated 700 million dogs, or up to 987 million, in the world.
+
+15
+00:01:24,930 --> 00:01:32,700
+However, only around 20% of this number truly live in human homes, with the rest remaining feral or communally owned.
+
+16
+00:01:34,420 --> 00:01:39,130
+Feel free to click the image to learn more about the dog.
