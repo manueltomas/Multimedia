@@ -1,0 +1,55 @@
+﻿1
+00:00:00,000 --> 00:00:02,400
+Encontrou uma rã!
+
+2
+00:00:02,650 --> 00:00:11,680
+A rã, conhecida como Anura, é uma espécie de anfíbio comum na natureza em todos os continentes do mundo.
+
+3
+00:00:11,880 --> 00:00:20,920
+Diferentes espécies de rãs podem ser encontradas em diferentes ambientes, desde regiões tropicais a regiões subárticas. 
+
+4
+00:00:21,120 --> 00:00:26,720
+No entanto, a maioria das espécies reside em florestas tropicais. 
+
+5
+00:00:26,920 --> 00:00:36,800
+As espécies de rãs mais enverrugadas tendem a ser chamadas de sapos, mas a distinção entre rãs e sapos é informal e não científica. 
+
+6
+00:00:37,000 --> 00:00:48,170
+O fóssil mais antigo de uma espécie da linhagem da rã que é conhecido foi encontrado em Madagascar e é datado de 250 milhões de anos atrás, 
+
+7
+00:00:48,370 --> 00:00:54,850
+com certas técnicas indicando até 265 milhões de anos atrás. 
+
+8
+00:00:55,050 --> 00:01:01,570
+As populações de sapos diminuíram drasticamente desde a década de 1950.
+
+9
+00:01:01,770 --> 00:01:07,580
+Mais de um terço das espécies de rãs são consideradas ameaçadas de extinção
+
+10
+00:01:07,780 --> 00:01:15,010
+e acredita-se que mais de 120 espécies tenham-se extinguido desde a década de 1980.
+
+11
+00:01:15,210 --> 00:01:24,820
+As causas são difíceis de determinar, mas acredita-se que espécies como as rãs, que têm presença tanto na água quanto na terra,
+
+12
+00:01:25,020 --> 00:01:34,100
+possuem pele sensível e papel intermediário na cadeia alimentar, são bons indicadores da saúde de um ecossistema.
+
+13
+00:01:34,300 --> 00:01:42,690
+Além disso, doenças infeciosas têm vindo espalhar-se entre as rãs, contribuindo para esse declínio.
+
+14
+00:01:42,890 --> 00:01:48,980
+Clique na imagem para aprender mais sobre a rã.
