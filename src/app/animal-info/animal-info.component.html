@@ -10,11 +10,13 @@
             </select>
         </div>
         <div>
-            <div class="link-count" *ngIf="end">
-                <div class="link" (click)="getAnimalInfoLink()">
+            <a [routerLink]="">
+                <div class="link-count" *ngIf="end">
+                    <div class="link" (click)="getAnimalInfoLink()" mat-raised-button #tooltip="matTooltip" matTooltip="{{getWikiName()}}" matTooltipHideDelay="100000">
 
+                    </div>
                 </div>
-            </div>
+            </a>
             <video id="animalVideo" src="{{getVideoUrl()}}" controls (timeupdate)="timeUpdate($event)" type="video/mp4">
             </video>
         </div>

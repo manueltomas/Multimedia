@@ -116,4 +116,18 @@ export class AnimalInfoComponent implements OnInit {
     //this.router.navigateByUrl(this.currAnimal.link);
     window.open(this.currAnimal.link, "_blank");
   }
+
+  getAnimalLink(){
+    return "info";
+  }
+
+  getWikiName(){
+    var name = this.currAnimal.name;
+    
+    var nameAux = name.charAt(0).toUpperCase();;
+    for(var i = 1; i < name.length; i++){
+      nameAux = nameAux + name.charAt(i);
+    }
+    return `${nameAux} Wikipedia Page`;
+  }
 }
