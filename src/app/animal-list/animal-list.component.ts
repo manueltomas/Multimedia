@@ -45,7 +45,8 @@ export class AnimalListComponent implements OnInit {
    * It changes the list of animals being shown (which is inside of animalService) so that it only contains the animals
    * from this world. This is done via a method inside animalService
    */
-  showLocalAnimals(){
+  showLocalAnimals(event:any){
+    this.updateButtonSelected(event.target);
     this.animalService.showWorld();
   }
 
@@ -54,10 +55,22 @@ export class AnimalListComponent implements OnInit {
    * It changes the list of animals being shown (which is inside of animalService) so that it contains all animals.
    * This is done via a method inside animalService
    */
-  showAllAnimals(){
+  showAllAnimals(event:any){
+    this.updateButtonSelected(event.target);
     this.animalService.showAll();
   }
   
+  updateButtonSelected(selectedButton){
+    Array.from(document.getElementsByClassName("list-btn")).forEach(function (element) {
+      element.classList.remove("selected")
+    });
+    if(selectedButton.classList.contains("list-btn")){
+      selectedButton.classList.add("selected");
+    } else{
+      selectedButton.parentElement.classList.add("selected");
+    }
+  }
+
   /**
    * This method is called when the user clicks on an animal
    * It "notifies" the animalInfoService what animal was clicked and changes to the animalInfo page
@@ -69,7 +82,6 @@ export class AnimalListComponent implements OnInit {
 		this.router.navigate(['info']);
 	}
   }
-
 
   mirrorListRight(){
     var container = document.getElementById('animals');

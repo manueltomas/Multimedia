@@ -3,24 +3,34 @@
         <div id="header" class="header">
             <img src="\assets\icons\animals-list-icon.png">
             <div class="list-btns">
-                <div (click)="showLocalAnimals()" class="list-btn selected">
+                <div (click)="showLocalAnimals($event)" class="list-btn selected">
                     <a>Local</a>
                 </div>
-                <div (click)="showAllAnimals()" class="list-btn">
+                <div (click)="showAllAnimals($event)" class="list-btn">
                     <a>Global</a>
                 </div>
             </div>
         </div>
         <div id="main" class="main">
-            <div class="animal" *ngFor="let a of animalService.getAnimals()">
-                <img *ngIf="a.catched" id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
-                <img *ngIf="!a.catched" id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}" (click)="onClickAnimal(a)">
-            </div>
+            <ng-container *ngFor="let a of animalService.getAnimals()">
+                <div *ngIf="a.catched" [ngClass]="'animal catched'">
+                    <img id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}"
+                        (click)="onClickAnimal(a)">
+                </div>
+                <div *ngIf="!a.catched" [ngClass]="'animal'">
+                    <img id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}"
+                        (click)="onClickAnimal(a)">
+                </div>
+            </ng-container>
         </div>
         <div id="bar" class="bar"></div>
         <div id="footer" class="footer">
-            <input type="range" min="0" max="100" value="100" [(ngModel)]="volumeService.volume">
-            {{volumeService.volume}}
+            <div class="volume-slider">
+                <span class="material-icons">volume_down</span>
+                <input class="volume" type="range" min="0" max="100" value="100" [(ngModel)]="volumeService.volume">
+                <span class="material-icons">volume_up</span>
+            </div>
+            <p>{{volumeService.volume}}</p>
         </div>
     </div>
 </div>

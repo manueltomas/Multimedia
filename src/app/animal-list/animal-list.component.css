@@ -8,7 +8,7 @@
     display: grid;
     height: 100%;
     grid-template-columns: 2% 49% 49%;
-    grid-template-rows: 10% 85% 5%;
+    grid-template-rows: 10% 83% 7%;
     grid-template-areas: 
         "header header header"
         "bar animals animals"
@@ -71,9 +71,34 @@
     grid-area: footer;
     border: 2px solid black;
     border-radius: 0px 0px 5px 0px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.footer{
+.footer p{
+    margin: 0px;
+    font-size: 14px;
+}
+
+.footer .volume-slider{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer span{
+    color: black;
+}
+
+.footer .volume{
+    width: 50%;
+}
+
+.footer.right{
     border-radius: 0px 0px 0px 5px;
 }
 
@@ -101,6 +126,16 @@
     font-size: 3em;
     width: 90%;
     height: 20vh;
+    background-color: #222222ee;
+    cursor: pointer;
+}
+
+.animal:hover{
+    box-shadow: 0px 0px 0.2em white;
+}
+
+.animal.catched {
+    background-color: #00000022;
 }
 
 .animalImg {
@@ -114,6 +149,7 @@
 .animalImgCatched{
     width: auto;
     height: 80%;
+    filter: drop-shadow(.1em .1em .3em white);
 }
 
 #header img{
