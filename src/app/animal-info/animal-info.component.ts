@@ -34,6 +34,7 @@ export class AnimalInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //this.animalInfoService.animal = {id:1, name:'cat', description:'', imageUrl:'../assets/img/cat.png', catched:false, world:1, page:4, x:0.8715, y:0.4386, link:"http://en.wikipedia.org/wiki/Cat"}
     if(this.animalInfoService.animal == undefined){
       this.router.navigate(['']);
     }
@@ -45,10 +46,29 @@ export class AnimalInfoComponent implements OnInit {
     //this.data = parser.fromSrt("1\n00:00:00,000 --> 00:00:02,000\nEncontrou um gato!\n");
 
     var source = this;
+
+    this.showVideoEmbededSubs();
+
     this.http.get(`assets/subtitles/${this.currAnimal.name}-${this.language}.srt`, {responseType: 'text'})
         .subscribe(data => {
           source.data = parser.fromSrt(data);
         });
+  }
+
+  hideOurSubtitlesOptions(){
+    (<HTMLDivElement> document.getElementsByClassName("subtitle-options")[0]).style.display = "none";
+    (<HTMLDivElement> document.getElementsByClassName("subtitles")[0]).style.display = "none";
+  }
+
+  showVideoEmbededSubs(){
+    this.hideOurSubtitlesOptions();
+    var subs = document.getElementsByClassName("sub");
+    var en = <HTMLTrackElement> subs[0];
+    var pt = <HTMLTrackElement> subs[1];
+
+    en.src = "assets\\subtitles\\" + this.currAnimal.name + "-English.vtt";
+    pt.src = "assets\\subtitles\\" + this.currAnimal.name +"-Portuguese.vtt";
+
   }
   
   getCurrAnimalName(){
