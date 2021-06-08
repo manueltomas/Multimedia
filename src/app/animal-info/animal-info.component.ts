@@ -48,6 +48,7 @@ export class AnimalInfoComponent implements OnInit {
     var source = this;
 
     this.showVideoEmbededSubs();
+    this.addBackgroundPhoto()
 
     this.http.get(`assets/subtitles/${this.currAnimal.name}-${this.language}.srt`, {responseType: 'text'})
         .subscribe(data => {
@@ -69,6 +70,11 @@ export class AnimalInfoComponent implements OnInit {
     en.src = "assets\\subtitles\\" + this.currAnimal.name + "-English.vtt";
     pt.src = "assets\\subtitles\\" + this.currAnimal.name +"-Portuguese.vtt";
 
+  }
+
+  addBackgroundPhoto(){
+    var img = <HTMLImageElement>document.getElementsByClassName("bg-image")[0];
+    img.src = "assets\\img\\animalInfo_bg_world" + this.currAnimal.world + ".png";
   }
   
   getCurrAnimalName(){

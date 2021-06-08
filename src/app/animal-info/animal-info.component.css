@@ -8,9 +8,17 @@
         "back-button title none" 
         "a video b";
 
-    background-color: #B2905B;
+    /* background-color: #B2905B; */
     justify-items: center;
     align-items:  center;
+}
+
+.bg-image{
+    position: absolute;
+    width: 100%;
+    /* height: 100%; */
+    opacity: 90%;
+    z-index: -1;
 }
 
 #animalVideo{
@@ -21,6 +29,8 @@
 .title{
     grid-area: title;
     text-transform: capitalize;
+    background-color: #ffffff99;
+    border: none;
 }
 
 .filler{
