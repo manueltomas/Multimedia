@@ -20,6 +20,7 @@
 
 .title{
     grid-area: title;
+    text-transform: capitalize;
 }
 
 .filler{
@@ -56,4 +57,17 @@
     border: 3px solid #73AD21;
     text-align: center;
     z-index: 11;
+}
+
+.video-subtitles{
+    position: relative;
+}
+
+.subtitles{
+    position: absolute;
+    top: 82%;
+    left: 35%;
+    background-color: #000000aa;
+    color: white;
+    padding: 0px 11px;
 }

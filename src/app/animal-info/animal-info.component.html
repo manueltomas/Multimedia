@@ -2,14 +2,14 @@
     <h2 class="title">{{getCurrAnimalName()}}</h2>
     <button class="back-button" (click)="closeInfoPage()"> Close </button>
     <div class="video-container">
-        <div>
+        <div class="subtitle-options">
             <select name="language" [(ngModel)]="language" (change)="changedLang()">
                 <option value="Portuguese">Português</option>
                 <option value="English">English</option>
-                <option value="Off">Desativadas</option>
+                <option value="Off">No subtitles</option>
             </select>
         </div>
-        <div>
+        <div class="video-subtitles">
             <a [routerLink]="">
                 <div class="link-count" *ngIf="end">
                     <div class="link" (click)="getAnimalInfoLink()" mat-raised-button #tooltip="matTooltip" matTooltip="{{getWikiName()}}" matTooltipHideDelay="100000">
@@ -18,12 +18,14 @@
                 </div>
             </a>
             <video id="animalVideo" src="{{getVideoUrl()}}" controls (timeupdate)="timeUpdate($event)" type="video/mp4">
+                <track class="sub" kind="subtitles" srclang="en" src="" label="English" default />
+                <track class="sub" kind="subtitles" srclang="pt" src="" label="Portuguese" default />
             </video>
-        </div>
-        <div class="subtitles">
-            <p>
-                {{subtitles}}
-            </p>
+            <div class="subtitles">
+                <p>
+                    {{subtitles}}
+                </p>
+            </div>
         </div>
     </div>
 </div>
