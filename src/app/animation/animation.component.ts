@@ -127,7 +127,7 @@ export class AnimationComponent {
 	  }
       if(this.audio.paused){
         this.pair.audio = animal;
-        this.audio.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
+        this.audio.src = "assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
         this.audio.loop = true;
         this.audio.load();
         this.audio.play();
@@ -143,7 +143,7 @@ export class AnimationComponent {
       //this.audio2 = new Audio();
       if(this.audio2.paused){
         this.pair.audio2 = animal;
-        this.audio2.src = "../../../assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
+        this.audio2.src = "assets/sounds/" + this.animalsInPage[animal].animal.name + ".mp3";
         this.audio2.loop = true;
         this.audio2.load();
         this.audio2.play();
