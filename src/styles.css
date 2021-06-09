@@ -43,7 +43,7 @@ h1{
 }
 
 .arrow{
-    background-image: url("/assets/icons/nav-arrow-icon.png");
+    background-image: url("/Multimedia/assets/icons/nav-arrow-icon.png");
     background-repeat: no-repeat;
     height: 60px;
     width: 60px;
@@ -65,7 +65,7 @@ h1{
 }
 
 .back-button{
-    background-image: url("/assets/icons/backarrow-white.png");
+    background-image: url("/Multimedia/assets/icons/backarrow-white.png");
     background-repeat: no-repeat;
     height: 60px;
     width: 60px;
