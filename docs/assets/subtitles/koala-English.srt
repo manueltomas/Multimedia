@@ -1,0 +1,67 @@
+﻿1
+00:00:00,000 --> 00:00:02,680
+You have found a koala! 
+
+2
+00:00:02,880 --> 00:00:12,010
+The koala, known as Phascolarctos cinereus, is naturally not a species common over here.
+
+3
+00:00:12,210 --> 00:00:16,950
+In truth, koala’s are exclusively native to Australia,
+
+4
+00:00:17,150 --> 00:00:21,870
+leading this animal species to become eponymous with the continent.
+
+5
+00:00:22,070 --> 00:00:32,110
+Koala’s are arboreal herbivores, that is, a species of animal that has adapted to eating solely plant material, 
+
+6
+00:00:32,310 --> 00:00:38,280
+and which has evolved to move among trees. They are an asocial species, 
+
+7
+00:00:38,480 --> 00:00:43,420
+meaning the members of the species do not regularly remain in contact,
+
+8
+00:00:43,620 --> 00:00:48,650
+the exception being mothers and their still dependent offspring.
+
+9
+00:00:48,850 --> 00:00:56,010
+There is a visible distinction in koala populations between the north and south of Australia,
+
+10
+00:00:56,210 --> 00:01:01,490
+but there is debate on whether these constitute different subspecies.
+
+11
+00:01:01,690 --> 00:01:07,380
+Historically, the koala was only introduced to Europe recently,
+
+12
+00:01:07,580 --> 00:01:15,070
+with the first recorded encounter of a koala by a European being dated to 1798,
+
+13
+00:01:15,270 --> 00:01:20,940
+with illustration and scientific descriptions following within the following century.
+
+14
+00:01:21,140 --> 00:01:31,090
+Population estimates for the Koala are similarly disputed, and efforts to detect and count koalas are difficult 
+
+15
+00:01:31,290 --> 00:01:35,340
+as they remain hidden from potential predators such as humans.
+
+16
+00:01:35,540 --> 00:01:39,520
+The species is, however, considered Vulnerable.
+
+17
+00:01:39,720 --> 00:01:45,450
+Feel free to click the image to learn more about the koala.

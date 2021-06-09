@@ -1,0 +1,59 @@
+﻿1
+00:00:00,000 --> 00:00:02,550
+You have found a boar! 
+
+2
+00:00:02,750 --> 00:00:12,900
+The boar, known as Sus scrofa, is a species common in the wild all over Eurasia, North Africa, Australia and the Americas.
+
+3
+00:00:13,100 --> 00:00:20,770
+They are suidae, the family to which hogs, pigs and boars all belong to, and in particular,
+
+4
+00:00:20,970 --> 00:00:24,040
+they are the most widespread species from this family.
+
+5
+00:00:24,240 --> 00:00:33,180
+The boar has been accessed as Least Concern, meaning they are not in any danger of extinction or even scarcity, 
+
+6
+00:00:33,300 --> 00:00:38,680
+due to their high numbers and adaptability to a variety of different habitats.
+
+7
+00:00:38,880 --> 00:00:43,990
+So much so that it is considered an invasive species in many areas.
+
+8
+00:00:44,190 --> 00:00:52,150
+It is speculated that the Wild Boars may have originated in Southeast Asia, hundreds of thousands of years ago,
+
+9
+00:00:52,350 --> 00:00:58,530
+having spread throughout Europe, Asia and Africa and triumphing over their competitors.
+
+10
+00:00:58,730 --> 00:01:06,740
+The species lives in matriarchal societies consisting of related females and their young, regardless of gender.
+
+11
+00:01:06,940 --> 00:01:12,250
+Fully grown males go on to become solitary outside of their breeding season.
+
+12
+00:01:12,450 --> 00:01:18,500
+In most of its natural habitats, their main competitor is the grey wolf.
+
+13
+00:01:20,680 --> 00:01:25,940
+The wild boar has a long history of association with humans, and indeed
+
+14
+00:01:26,070 --> 00:01:31,460
+is the ancestor of most domestic pig breeds and traditional hunting quarry for millennia.
+
+15
+00:01:33,840 --> 00:01:39,240
+Feel free to click the image to learn more about the boar.
