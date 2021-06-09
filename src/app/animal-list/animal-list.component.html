@@ -13,13 +13,11 @@
         </div>
         <div id="main" class="main">
             <ng-container *ngFor="let a of animalService.getAnimals()">
-                <div *ngIf="a.catched" [ngClass]="'animal catched'">
-                    <img id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}"
-                        (click)="onClickAnimal(a)">
+                <div *ngIf="a.catched" [ngClass]="'animal catched'" (click)="onClickAnimal(a)">
+                    <img id="animalImg" class="animalImgCatched {{a.name}}" src="{{a.imageUrl}}">
                 </div>
-                <div *ngIf="!a.catched" [ngClass]="'animal'">
-                    <img id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}"
-                        (click)="onClickAnimal(a)">
+                <div *ngIf="!a.catched" [ngClass]="'animal'" (click)="onClickAnimal(a)">
+                    <img id="animalImg" class="animalImg {{a.name}}" src="{{a.imageUrl}}">
                 </div>
             </ng-container>
         </div>
