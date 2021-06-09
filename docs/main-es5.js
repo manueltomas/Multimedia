@@ -822,7 +822,7 @@
         },
         decls: 23,
         vars: 3,
-        consts: [["id", "enclosing"], ["id", "animals", 1, "animals"], ["id", "header", 1, "header"], ["src", "\\assets\\icons\\animals-list-icon.png"], [1, "list-btns"], [1, "list-btn", "selected", 3, "click"], [1, "list-btn", 3, "click"], ["id", "main", 1, "main"], [4, "ngFor", "ngForOf"], ["id", "bar", 1, "bar"], ["id", "footer", 1, "footer"], [1, "volume-slider"], [1, "material-icons"], ["type", "range", "min", "0", "max", "100", "value", "100", 1, "volume", 3, "ngModel", "ngModelChange"], [3, "ngClass", "click", 4, "ngIf"], [3, "ngClass", "click"], ["id", "animalImg", 3, "src"]],
+        consts: [["id", "enclosing"], ["id", "animals", 1, "animals"], ["id", "header", 1, "header"], ["src", "assets\\icons\\animals-list-icon.png"], [1, "list-btns"], [1, "list-btn", "selected", 3, "click"], [1, "list-btn", 3, "click"], ["id", "main", 1, "main"], [4, "ngFor", "ngForOf"], ["id", "bar", 1, "bar"], ["id", "footer", 1, "footer"], [1, "volume-slider"], [1, "material-icons"], ["type", "range", "min", "0", "max", "100", "value", "100", 1, "volume", 3, "ngModel", "ngModelChange"], [3, "ngClass", "click", 4, "ngIf"], [3, "ngClass", "click"], ["id", "animalImg", 3, "src"]],
         template: function AnimalListComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -1984,7 +1984,7 @@
         features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵProvidersFeature"]([_services_shared_service_service__WEBPACK_IMPORTED_MODULE_0__["SharedService"]])],
         decls: 12,
         vars: 1,
-        consts: [["id", "container", 1, "master"], ["id", "col1-header"], ["src", "\\assets\\img\\top_border_image.png"], ["id", "col1-content", 1, "main"], ["id", "col1-footer"], ["src", "\\assets\\img\\button_border_image.png"], ["id", "col2", 3, "animalListPos", 4, "ngIf"], ["id", "col2", 3, "animalListPos"]],
+        consts: [["id", "container", 1, "master"], ["id", "col1-header"], ["src", "assets\\img\\top_border_image.png"], ["id", "col1-content", 1, "main"], ["id", "col1-footer"], ["src", "assets\\img\\button_border_image.png"], ["id", "col2", 3, "animalListPos", 4, "ngIf"], ["id", "col2", 3, "animalListPos"]],
         template: function AppComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "head");
